@@ -20,6 +20,10 @@ ensure_file() {
 ensure_dir "$CORE_DIR/docs"
 ensure_dir "$CORE_DIR/templates"
 ensure_dir "$CORE_DIR/scripts"
+ensure_dir "$CORE_DIR/agents/shared"
+ensure_dir "$CORE_DIR/.claude/agents"
+ensure_dir "$CORE_DIR/.github/agents"
+ensure_dir "$CORE_DIR/.codex/agents"
 
 ensure_dir "$KNOWLEDGE_DIR/personal/raw"
 ensure_dir "$KNOWLEDGE_DIR/personal/wiki/self"

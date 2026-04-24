@@ -7,6 +7,7 @@ Core tooling, conventions, and bootstrap artifacts for the Alethea knowledge sys
 - architecture and lifecycle docs
 - markdown templates for source, wiki, and workspace pages
 - bootstrap scripts for creating or repairing the expected filesystem shape
+- shared Alethea specialist specs plus platform-specific root orchestrators
 - lightweight validation and inspection tooling over time
 
 ## What does not live here
@@ -41,4 +42,5 @@ with these siblings:
 - Architecture: [docs/architecture.md](docs/architecture.md)
 - Lifecycle: [docs/lifecycle.md](docs/lifecycle.md)
 - Conventions: [docs/conventions.md](docs/conventions.md)
+- Agents: [agents/shared/README.md](agents/shared/README.md)
 - Bootstrap: [scripts/bootstrap.sh](scripts/bootstrap.sh)

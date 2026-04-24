@@ -79,6 +79,22 @@ Common rules live in `alethea-core`.
 
 Domain-specific wiki taxonomy should live next to the domain in its local `schema/` folder. That keeps `alethea-core` generic while still allowing each domain to use its own top-level folders.
 
+## Agent layer
+
+The Alethea agent layer has two parts:
+
+- shared specialist specs in `agents/shared/`
+- platform-specific root orchestrators in `.claude/agents/`, `.github/agents/`, and `.codex/agents/`
+
+The intent is:
+
+- write specialist roles once
+- keep platform-specific roots thin
+- let roots route by reference to shared specialist specs instead of maintaining duplicated specialist prompts per platform
+
+`system.keeper` is the owner of the agent contract itself and should keep all shared specialist specs aligned with `agents/shared/agent-spec-schema.md`.
+`system.keeper` also owns synchronization of the Alethea agent family across `.claude/`, `.github/`, and `.codex/` root orchestrators whenever the shared specialist set changes.
+
 ## Why v1 is intentionally small
 
 - Keep the number of top-level wiki categories small.
