@@ -83,7 +83,8 @@ Domain-specific wiki taxonomy should live next to the domain in its local `schem
 
 The Alethea agent layer has two parts:
 
-- shared specialist specs in `agents/shared/`
+- shared specialist specs in `agents/shared/specs/`
+- shared docs and templates in `agents/shared/docs/` and `agents/shared/templates/`
 - platform-specific entrypoints in `.claude/commands/`, `.github/agents/`, and `.agents/skills/`
 
 The intent is:
@@ -94,7 +95,7 @@ The intent is:
 
 For Codex, the project-scoped entrypoint is the skill folder `.agents/skills/alethea/`.
 
-`system.keeper` is the owner of the agent contract itself and should keep all shared specialist specs aligned with `agents/shared/agent-spec-schema.md`.
+`system.keeper` is the owner of the agent contract itself and should keep all shared specialist specs aligned with `agents/shared/docs/agent-spec-schema.md`.
 `system.keeper` also owns synchronization of the Alethea agent family across `.claude/`, `.github/`, and `.agents/` entrypoints whenever the shared specialist set changes.
 
 ## Why v1 is intentionally small

@@ -2,7 +2,7 @@
 
 This file defines the canonical contract for Alethea-specific agents.
 
-Every specialist agent in `agents/shared/` should follow this shape so the system stays predictable as the agent family grows.
+Every specialist agent in `agents/shared/specs/` should follow this shape so the system stays predictable as the agent family grows.
 
 ## Required sections
 

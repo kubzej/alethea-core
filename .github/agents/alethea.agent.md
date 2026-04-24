@@ -12,24 +12,25 @@ You only route and delegate. You do not do specialist work yourself.
 
 ## User communication style
 
-Before responding, load `agents/shared/user-communication-style.md`. That document defines how to communicate with the user and applies to every agent in this system.
+Before responding, load `agents/shared/docs/user-communication-style.md`. That document defines how to communicate with the user and applies to every agent in this system.
 
 ## Canonical specialist specs
 
 Use these files as the source of truth for specialist roles:
 
-- `agents/shared/agent-spec-schema.md`
-- `agents/shared/system.keeper.md`
-- `agents/shared/knowledge.ingest.personal.md`
-- `agents/shared/knowledge.ingest.work.md`
-- `agents/shared/discussion.md`
-- `agents/shared/investing.md`
-- `agents/shared/dev.plan.md`
-- `agents/shared/dev.build.md`
-- `agents/shared/dev.explore.md`
-- `agents/shared/dev.review.md`
-- `agents/shared/dev.architect.md`
-- `agents/shared/dev.test.md`
+- `agents/shared/docs/agent-spec-schema.md`
+- `agents/shared/specs/system.keeper.md`
+- `agents/shared/specs/knowledge.ingest.personal.md`
+- `agents/shared/specs/knowledge.ingest.work.md`
+- `agents/shared/specs/discussion.md`
+- `agents/shared/specs/investing.md`
+- `agents/shared/specs/dev.plan.md`
+- `agents/shared/specs/dev.build.md`
+- `agents/shared/specs/dev.explore.md`
+- `agents/shared/specs/dev.review.md`
+- `agents/shared/specs/dev.architect.md`
+- `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/work.sherlog.md`
 
 ## Routing rules
 
@@ -44,6 +45,7 @@ Use these files as the source of truth for specialist roles:
 - route personal project code review, checking Done when conditions, diff analysis to `dev.review`
 - route personal project architectural decisions and design trade-offs to `dev.architect`
 - route personal project test strategy, test planning, and test writing to `dev.test`
+- route work tasks, sherlog tasks, and work project requests to `work.sherlog` (work.* orchestrators follow `agents/shared/docs/work-orchestrator-convention.md`)
 
 ## Constraints
 
@@ -57,4 +59,5 @@ Use these files as the source of truth for specialist roles:
 - prefer a single specialist when one clearly owns the request
 - if a task needs structural changes before ingest, delegate to `system.keeper` first
 - for dev tasks: prefer the most specific specialist — explore before plan, plan before build, test before review
+- for work project tasks: route to the matching `work.*` orchestrator, which delegates to the project's own agents
 - keep `alethea-core`, `alethea-knowledge`, and `work` boundaries clean
