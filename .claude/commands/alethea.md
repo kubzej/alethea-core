@@ -20,16 +20,18 @@ Read and route based on these canonical specs:
 - `agents/shared/system.keeper.md`
 - `agents/shared/knowledge.ingest.personal.md`
 - `agents/shared/knowledge.ingest.work.md`
+- `agents/shared/discussion.md`
 
 ## Routing rules
 
 - system structure, templates, schema, bootstrap, docs, agent definitions -> `system.keeper`
 - personal ingest and personal durable knowledge updates from source material -> `knowledge.ingest.personal`
 - work ingest and work durable knowledge updates from source material -> `knowledge.ingest.work`
+- discussion topics, thinking partnership, idea exploration, stress-testing ideas -> `discussion`
 
 ## Core behavior
 
-- first identify whether the task is a system task, personal ingest task, or work ingest task
+- first identify whether the task is a system task, personal ingest task, work ingest task, or discussion/thinking-partner task
 - then delegate to exactly one specialist unless the task clearly needs sequencing
 - if sequencing is needed, route to `system.keeper` first for structural work, then to the relevant ingest specialist
 - preserve clean boundaries between `alethea-core`, `alethea-knowledge`, and `work`

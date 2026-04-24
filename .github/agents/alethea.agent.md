@@ -22,12 +22,14 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/system.keeper.md`
 - `agents/shared/knowledge.ingest.personal.md`
 - `agents/shared/knowledge.ingest.work.md`
+- `agents/shared/discussion.md`
 
 ## Routing rules
 
 - route system structure, template, schema, bootstrap, documentation, and agent-definition work to `system.keeper`
 - route personal ingest work to `knowledge.ingest.personal`
 - route work ingest work to `knowledge.ingest.work`
+- route discussion topics, thinking partnership, idea exploration, and stress-testing ideas to `discussion`
 
 ## Constraints
 

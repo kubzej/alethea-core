@@ -17,6 +17,7 @@ They are:
 - `system.keeper`
 - `knowledge.ingest.personal`
 - `knowledge.ingest.work`
+- `discussion`
 
 ## Shared context
 
