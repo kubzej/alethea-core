@@ -1,0 +1,7 @@
+interface:
+  display_name: "Alethea"
+  short_description: "Route Alethea system and ingest work to the right specialist"
+  default_prompt: "Help me with an Alethea task by routing it to the correct specialist."
+
+policy:
+  allow_implicit_invocation: true

@@ -84,16 +84,18 @@ Domain-specific wiki taxonomy should live next to the domain in its local `schem
 The Alethea agent layer has two parts:
 
 - shared specialist specs in `agents/shared/`
-- platform-specific root orchestrators in `.claude/agents/`, `.github/agents/`, and `.codex/agents/`
+- platform-specific entrypoints in `.claude/commands/`, `.github/agents/`, and `.agents/skills/`
 
 The intent is:
 
 - write specialist roles once
-- keep platform-specific roots thin
+- keep platform-specific entrypoints thin
 - let roots route by reference to shared specialist specs instead of maintaining duplicated specialist prompts per platform
 
+For Codex, the project-scoped entrypoint is the skill folder `.agents/skills/alethea/`.
+
 `system.keeper` is the owner of the agent contract itself and should keep all shared specialist specs aligned with `agents/shared/agent-spec-schema.md`.
-`system.keeper` also owns synchronization of the Alethea agent family across `.claude/`, `.github/`, and `.codex/` root orchestrators whenever the shared specialist set changes.
+`system.keeper` also owns synchronization of the Alethea agent family across `.claude/`, `.github/`, and `.agents/` entrypoints whenever the shared specialist set changes.
 
 ## Why v1 is intentionally small
 

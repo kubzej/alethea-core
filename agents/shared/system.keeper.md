@@ -30,8 +30,8 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - update architecture, lifecycle, and conventions docs
 - evolve templates and bootstrap scripts
 - maintain `agents/shared/agent-spec-schema.md`
-- keep shared agent specs and root orchestrators aligned
-- when adding, removing, or renaming an Alethea agent, update all platform root orchestrators that reference the agent family
+- keep shared agent specs and platform entrypoints aligned
+- when adding, removing, or renaming an Alethea agent, update all platform entrypoints that reference the agent family
 - make structural refactors that improve consistency
 - create or revise Alethea-specific agents
 
@@ -43,7 +43,7 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - a new Alethea-specific agent must be added
 - the wording, boundaries, or contract of existing Alethea agents needs tightening
 - platform roots and shared specs drift out of sync
-- one platform root orchestrator no longer matches the current agent family
+- one platform entrypoint no longer matches the current agent family
 - a structural cleanup is needed
 
 ## Never do
@@ -59,13 +59,30 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - if the task is about creating knowledge from source material, route to an ingest agent
 - if the task is about the system itself, keep the task here
 
+## Claude platform agent structure
+
+Claude Code exposes the Alethea orchestrator as a single slash command:
+
+- `.claude/commands/alethea.md` — slash command `/alethea` available directly in the Claude chat panel (IDE extension in VS Code, Cursor, etc.)
+
+A separate `.claude/agents/alethea.md` subagent definition previously existed but was removed as a duplicate. The command is the only Claude entrypoint.
+
+## Codex platform agent structure
+
+Codex uses a single project skill entrypoint:
+
+- `.agents/skills/alethea/SKILL.md` — Codex skill prompt
+- `.agents/skills/alethea/agents/openai.yaml` — Codex packaging metadata
+
+Do not keep a parallel `.codex/` agent definition.
+
 ## Synchronization rule
 
 If the Alethea agent family changes, `system.keeper` must treat these as one unit of work:
 
 - shared specialist specs in `agents/shared/`
-- Claude root orchestrator in `.claude/agents/alethea.md`
+- Claude chat command in `.claude/commands/alethea.md`
 - Copilot root orchestrator in `.github/agents/alethea.agent.md`
-- Codex root orchestrator in `.codex/agents/alethea.md`
+- Codex skill in `.agents/skills/alethea/`
 
 No agent-family change is complete until all relevant roots reflect it.

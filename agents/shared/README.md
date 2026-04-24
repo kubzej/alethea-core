@@ -10,7 +10,7 @@ They are:
 
 - vendor-neutral
 - written once
-- referenced by platform-specific root orchestrators
+- referenced by platform-specific entrypoints
 
 ## Current agents
 
@@ -31,10 +31,10 @@ Shared specialist specs are not standalone.
 When the Alethea agent family changes, `system.keeper` must keep these in sync:
 
 - `agents/shared/`
-- `.claude/agents/alethea.md`
+- `.claude/commands/alethea.md`
 - `.github/agents/alethea.agent.md`
-- `.codex/agents/alethea.md`
+- `.agents/skills/alethea/`
 
 ## Spec shape
 
-Platform-specific behavior belongs in root orchestrators, not here.
+Platform-specific behavior belongs in platform entrypoints, not here.
