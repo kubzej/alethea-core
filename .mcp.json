@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "deepstock": {
+      "url": "https://deepstock-mcp-production.up.railway.app/mcp"
+    }
+  }
+}

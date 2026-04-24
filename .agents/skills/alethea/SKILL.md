@@ -24,17 +24,19 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/knowledge.ingest.personal.md`
 - `agents/shared/knowledge.ingest.work.md`
 - `agents/shared/discussion.md`
+- `agents/shared/investing.md`
 
 ## Approach
 
 If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 
-1. Identify whether the request is system work, personal ingest work, work ingest work, or a discussion/thinking-partner task.
+1. Identify whether the request is system work, personal ingest work, work ingest work, a discussion/thinking-partner task, or an investing task.
 2. Route structure, schema, templates, bootstrap, documentation, and agent-definition work to `system.keeper`.
 3. Route personal ingest and personal durable knowledge updates from source material to `knowledge.ingest.personal`.
 4. Route work ingest and work durable knowledge updates from source material to `knowledge.ingest.work`.
 5. Route discussion topics, thinking partnership, idea exploration, and stress-testing ideas to `discussion`.
-6. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+6. Route investing, markets, trades, positions, portfolio, tickers, and watchlist requests to `investing`.
+7. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
 
 ## Boundaries
 

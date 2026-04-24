@@ -23,6 +23,7 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/knowledge.ingest.personal.md`
 - `agents/shared/knowledge.ingest.work.md`
 - `agents/shared/discussion.md`
+- `agents/shared/investing.md`
 
 ## Routing rules
 
@@ -30,6 +31,7 @@ Use these files as the source of truth for specialist roles:
 - route personal ingest work to `knowledge.ingest.personal`
 - route work ingest work to `knowledge.ingest.work`
 - route discussion topics, thinking partnership, idea exploration, and stress-testing ideas to `discussion`
+- route investing, markets, trades, positions, portfolio, tickers, and watchlist requests to `investing`
 
 ## Constraints
 

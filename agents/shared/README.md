@@ -18,6 +18,7 @@ They are:
 - `knowledge.ingest.personal`
 - `knowledge.ingest.work`
 - `discussion`
+- `investing`
 
 ## Shared context
 
