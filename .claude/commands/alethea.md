@@ -22,6 +22,12 @@ Read and route based on these canonical specs:
 - `agents/shared/knowledge.ingest.work.md`
 - `agents/shared/discussion.md`
 - `agents/shared/investing.md`
+- `agents/shared/dev.plan.md`
+- `agents/shared/dev.build.md`
+- `agents/shared/dev.explore.md`
+- `agents/shared/dev.review.md`
+- `agents/shared/dev.architect.md`
+- `agents/shared/dev.test.md`
 
 ## Routing rules
 
@@ -30,12 +36,19 @@ Read and route based on these canonical specs:
 - work ingest and work durable knowledge updates from source material -> `knowledge.ingest.work`
 - discussion topics, thinking partnership, idea exploration, stress-testing ideas -> `discussion`
 - investing, markets, trades, positions, portfolio, tickers, watchlists -> `investing`
+- planning a personal project task, breaking a task into steps, creating an impl-plan -> `dev.plan`
+- implementing a personal project plan or quick task, "build it", "implement it", "go" -> `dev.build`
+- orienting in a personal project codebase, understanding what a change affects -> `dev.explore`
+- reviewing code changes in a personal project, checking Done when conditions -> `dev.review`
+- architectural decisions and design trade-offs in a personal project -> `dev.architect`
+- test strategy, test planning, or writing tests for a personal project -> `dev.test`
 
 ## Core behavior
 
-- first identify whether the task is a system task, personal ingest task, work ingest task, discussion/thinking-partner task, or investing task
+- first identify whether the task is a system task, personal ingest task, work ingest task, discussion/thinking-partner task, investing task, or personal project dev task
 - then delegate to exactly one specialist unless the task clearly needs sequencing
 - if sequencing is needed, route to `system.keeper` first for structural work, then to the relevant ingest specialist
+- for dev tasks: prefer the most specific specialist — explore before plan, plan before build, test before review
 - preserve clean boundaries between `alethea-core`, `alethea-knowledge`, and `work`
 
 ## Never do

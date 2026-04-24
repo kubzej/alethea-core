@@ -19,6 +19,12 @@ They are:
 - `knowledge.ingest.work`
 - `discussion`
 - `investing`
+- `dev.plan`
+- `dev.build`
+- `dev.explore`
+- `dev.review`
+- `dev.architect`
+- `dev.test`
 
 ## Shared context
 
