@@ -18,6 +18,10 @@ They are:
 - `knowledge.ingest.personal`
 - `knowledge.ingest.work`
 
+## Shared context
+
+- `user-communication-style.md` — how to communicate with the user; loaded by all agents on all platforms
+
 ## Canonical contract
 
 All shared specialists should follow:

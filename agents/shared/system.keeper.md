@@ -30,6 +30,7 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - update architecture, lifecycle, and conventions docs
 - evolve templates and bootstrap scripts
 - maintain `agents/shared/agent-spec-schema.md`
+- maintain `agents/shared/user-communication-style.md` and ensure all platform entrypoints load it
 - keep shared agent specs and platform entrypoints aligned
 - when adding, removing, or renaming an Alethea agent, update all platform entrypoints that reference the agent family
 - make structural refactors that improve consistency
@@ -81,6 +82,7 @@ Do not keep a parallel `.codex/` agent definition.
 If the Alethea agent family changes, `system.keeper` must treat these as one unit of work:
 
 - shared specialist specs in `agents/shared/`
+- shared user context in `agents/shared/user-communication-style.md`
 - Claude chat command in `.claude/commands/alethea.md`
 - Copilot root orchestrator in `.github/agents/alethea.agent.md`
 - Codex skill in `.agents/skills/alethea/`

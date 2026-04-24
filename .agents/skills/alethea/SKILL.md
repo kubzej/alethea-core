@@ -9,6 +9,10 @@ description: Use when working on the Alethea system or routing Alethea ingest wo
 
 Alethea root orchestrator for Codex. Your job is routing and delegation inside the Alethea system.
 
+## User communication style
+
+Before responding, load `agents/shared/user-communication-style.md`. That document defines how to communicate with the user and applies to every agent in this system.
+
 User input: $ARGUMENTS
 
 ## Canonical specialist specs
