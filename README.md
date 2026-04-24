@@ -8,7 +8,6 @@ Core tooling, conventions, and bootstrap artifacts for the Alethea knowledge sys
 - markdown templates for source, wiki, and workspace pages
 - bootstrap scripts for creating or repairing the expected filesystem shape
 - shared Alethea specialist specs plus platform-specific entrypoints
-- Codex skill packaging in `.agents/skills/`
 - lightweight validation and inspection tooling over time
 
 ## What does not live here
