@@ -28,7 +28,8 @@ Read and route based on these canonical specs:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
-- `agents/shared/specs/work.sherlog.md`
+
+Work agent specs live in `work/agents/specs/` (private repo — not listed here).
 
 ## Routing rules
 
@@ -43,7 +44,8 @@ Read and route based on these canonical specs:
 - reviewing code changes in a personal project, checking Done when conditions -> `dev.review`
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
-- work tasks, sherlog, work project tasks -> `work.sherlog` (see `agents/shared/docs/work-orchestrator-convention.md` for the work.* pattern)
+- Sherlog project tasks -> `project.sherlog` (spec: `work/agents/specs/project.sherlog.md`)
+- work debugging, bug investigation, data anomalies -> `work.debug` (spec: `work/agents/specs/work.debug.md`)
 
 ## Core behavior
 
@@ -51,7 +53,8 @@ Read and route based on these canonical specs:
 - then delegate to exactly one specialist unless the task clearly needs sequencing
 - if sequencing is needed, route to `system.keeper` first for structural work, then to the relevant ingest specialist
 - for dev tasks: prefer the most specific specialist — explore before plan, plan before build, test before review
-- for work project tasks: route to the matching `work.*` orchestrator, which will delegate to the project's own agents
+- for work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents
+- for cross-cutting work tasks (debug, etc.): route to the matching `work.*` specialist (spec in `work/agents/specs/`)
 - preserve clean boundaries between `alethea-core`, `alethea-knowledge`, and `work`
 
 ## Never do

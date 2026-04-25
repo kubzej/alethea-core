@@ -37,13 +37,14 @@ All specialist agent specs:
 - `dev.architect`
 - `dev.test`
 
-### Work project orchestrators
+### Work agents
 
-Thin sub-orchestrators that bridge Alethea to specific work project agents. Each one is a pointer — it knows the project path, knowledge path, and which project agents exist, and routes to them. It does not define new agents or hold content.
+Work agents live in `work/agents/specs/` (private repo) — not in this directory. Two categories:
+
+- **`project.<name>`** — project orchestrators, thin bridges to a specific work project's own agents
+- **`work.<capability>`** — cross-cutting work specialists (e.g. `work.debug`)
 
 See [docs/work-orchestrator-convention.md](docs/work-orchestrator-convention.md) for the full convention: naming, lifecycle, how to add and remove.
-
-- `work.sherlog` — Sherlog project (`/Users/jakubmares/Documents/Projects/work/hcp/ai-engineering/experiments/sherlog`)
 
 ## templates/
 

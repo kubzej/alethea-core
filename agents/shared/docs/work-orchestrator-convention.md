@@ -1,18 +1,38 @@
-# Work Orchestrator Convention
+# Work Agent Convention
 
-This document defines how `work.*` sub-orchestrators are structured and managed. It is a conventions doc, not an agent spec.
+This document defines how work agents are structured and managed. It is a conventions doc, not an agent spec.
 
-## Naming
+## Two categories
 
-`work.<project-name>`
+### Project orchestrators (`project.<name>`)
 
-Use the project name as it appears in the repo or path — lowercase, no spaces.
+Thin bridges to a specific work project's own agents.
 
-Examples: `work.alpha`, `work.beta`
+- **Naming:** `project.<project-name>` — use the project name as it appears in the repo or path, lowercase, no spaces
+- **Examples:** `project.sherlog`, `project.alpha`
+- **Role:** knows the project path, knowledge path, and which project agents exist; routes to them; does not act
+- **Location:** `work/agents/specs/project.<name>.md`
 
-## Role
+### Work specialists (`work.<capability>`)
 
-A `work.*` orchestrator is a thin bridge. It knows the project, its agents, and the knowledge boundary. It routes — it does not act.
+Cross-cutting specialists for work-wide tasks — not tied to a specific project.
+
+- **Naming:** `work.<capability>` — use a short, descriptive capability name
+- **Examples:** `work.debug`
+- **Role:** full specialist agent; executes the capability directly for any Hconnect work context
+- **Location:** `work/agents/specs/work.<capability>.md`
+
+---
+
+## Why work agents live in `work/`, not `alethea-core`
+
+Work agent specs contain company-specific content (project paths, infra details, subscription names). They must not live in `alethea-core`, which is a personal repo that may be pushed publicly.
+
+**All work agent specs go in:** `work/agents/specs/`
+
+Alethea entrypoints reference them by name in routing rules only (no spec list entry).
+
+---
 
 ## Knowledge boundary
 
@@ -24,39 +44,49 @@ alethea-knowledge/work/wiki/projects/<project-name>/
 
 Never into `personal/`. Never scattered across ad hoc locations.
 
+---
+
 ## Structure rules
 
-- **Thin bridge only** — a `work.*` spec lists the project's own agents and routes to them; it defines no new agents itself
+- **Project orchestrators are thin bridges only** — list the project's own agents and route to them; define no new agents
 - **No shared agent layer** — work projects own their own agent definitions (in their own `.github/agents/` or equivalent); Alethea does not absorb them
-- **Project path is explicit** — every `work.*` spec states the absolute path to the project repo
-- **Delegation only** — the sub-orchestrator never directly edits project code or writes knowledge pages
+- **Project path is explicit** — every `project.*` spec states the absolute path to the project repo
+- **Delegation only** — orchestrators never directly edit project code or write knowledge pages
+
+---
 
 ## Lifecycle
 
-- **Created** when active work on a project begins and routing is needed
-- **Deleted** when the project ends or the user stops working on it — no archiving, no migration; the knowledge stays in `alethea-knowledge/work/`, the spec file disappears
+- **Created** when active work begins and routing is needed
+- **Deleted** when the project ends or the user stops working on it — no archiving, no migration; knowledge stays in `alethea-knowledge/work/`; spec file disappears
 - Deletion is clean by design: the spec is a thin pointer, not a content store
 
-## How to add a new work orchestrator
+---
 
-1. Copy `agents/shared/templates/work.template.md` and rename it to `agents/shared/specs/work.<new-project>.md`
-2. Update:
-   - agent name (`work.<new-project>`)
-   - project path
-   - knowledge path
-   - project agents table (from the project's `.github/agents/` or equivalent)
-3. Add the spec to all three platform entrypoints under the work routing section:
+## How to add a new project orchestrator
+
+1. Create `work/agents/specs/project.<name>.md` (use existing project spec as template)
+2. Fill in: agent name, project path, knowledge path, project agents table
+3. Add routing rule to all three platform entrypoints (routing rule only — no spec list entry):
    - `.claude/commands/alethea.md`
    - `.github/agents/alethea.agent.md`
    - `.agents/skills/alethea/SKILL.md`
-4. Add the agent to `agents/shared/README.md` under "Work project orchestrators"
 
-## How to remove a work orchestrator
+## How to add a new work specialist
 
-1. Delete `agents/shared/specs/work.<project>.md`
+1. Create `work/agents/specs/work.<capability>.md`
+2. Add routing rule to all three platform entrypoints (routing rule only — no spec list entry):
+   - `.claude/commands/alethea.md`
+   - `.github/agents/alethea.agent.md`
+   - `.agents/skills/alethea/SKILL.md`
+
+## How to remove a work agent
+
+1. Delete `work/agents/specs/<agent>.md`
 2. Remove routing entries from all three platform entrypoints
-3. Remove from `agents/shared/README.md`
-4. Leave `alethea-knowledge/work/wiki/projects/<project>/` in place — knowledge outlives the orchestrator
+3. Leave `alethea-knowledge/work/wiki/projects/<project>/` in place — knowledge outlives the agent
+
+---
 
 ## Ownership
 
