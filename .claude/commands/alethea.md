@@ -59,6 +59,15 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - for cross-cutting work tasks (debug, etc.): route to the matching `work.*` specialist (spec in `work/agents/specs/`)
 - preserve clean boundaries between `alethea-core`, `alethea-knowledge`, and `work`
 
+## Handoff execution
+
+Claude exposes Alethea through a single root command, so routing must be executed as a hard handoff inside the same conversation when no native specialist transfer exists.
+
+- after selecting a specialist, load that specialist spec and continue under that specialist's contract
+- do not keep behaving like the root orchestrator for the rest of the task unless the user changes topics or sequencing requires another specialist
+- treat the specialist's write obligations as part of task completion
+- if the specialist has write scope and the conversation surfaced durable content that belongs there, persist it before closing the task
+
 ## Never do
 
 - do not edit files directly as the primary worker

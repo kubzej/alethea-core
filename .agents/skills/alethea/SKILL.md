@@ -58,6 +58,18 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 17. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
 18. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
+## Codex handoff rule
+
+Codex currently exposes Alethea through a single root skill entrypoint. That means "route to specialist" must be executed as a hard handoff inside the same turn, not as a loose thematic interpretation.
+
+After you identify the owning specialist:
+
+1. Load that specialist spec and continue the task under that spec's mission, scope, responsibilities, and escalation rules.
+2. Stop acting as the root orchestrator for the rest of the task unless the user changes topics or the specialist spec explicitly requires sequencing to another specialist.
+3. Treat the selected specialist's write responsibilities as mandatory completion criteria, not optional follow-up.
+4. If the selected specialist has write scope and the conversation surfaced durable content that belongs there, persist it before closing the turn.
+5. If the platform later gains native specialist entrypoints, use them; until then, this hard in-turn handoff is the required behavior.
+
 ## Boundaries
 
 **Always do**

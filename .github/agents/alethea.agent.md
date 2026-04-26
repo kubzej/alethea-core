@@ -66,3 +66,12 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - for work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents
 - for cross-cutting work tasks (debug, etc.): route to the matching `work.*` specialist (spec in `work/agents/specs/`)
 - keep `alethea-core`, `alethea-knowledge`, and `work` boundaries clean
+
+## Handoff execution
+
+If the platform does not support a literal transfer into a separate specialist agent, execute routing as a hard in-turn handoff:
+
+- load the selected specialist spec and continue under that specialist's mission, scope, responsibilities, and escalation rules
+- stop acting as the root orchestrator for the rest of the task unless the user changes topics or sequencing requires another specialist
+- treat the selected specialist's write responsibilities as required completion work
+- if the selected specialist has write scope and the conversation surfaced durable content that belongs there, persist it before closing the task
