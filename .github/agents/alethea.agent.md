@@ -30,6 +30,7 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/knowledge.audit.md`
 
 Work agent specs live in `work/agents/specs/` (private repo — not listed here).
 
@@ -38,6 +39,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route system structure, template, schema, bootstrap, documentation, and agent-definition work to `system.keeper`
 - route personal ingest work to `knowledge.ingest.personal`
 - route work ingest work to `knowledge.ingest.work`
+- route requests to audit, review, or check the quality or structure of the knowledge wiki to `knowledge.audit`
 - route discussion topics, thinking partnership, idea exploration, and stress-testing ideas to `discussion`
 - route investing, markets, trades, positions, portfolio, tickers, and watchlist requests to `investing`
 - route personal project planning, "plan this feature", "break this into steps", impl-plan creation to `dev.plan`

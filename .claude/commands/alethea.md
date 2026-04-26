@@ -28,6 +28,7 @@ Read and route based on these canonical specs:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/knowledge.audit.md`
 
 Work agent specs live in `work/agents/specs/` (private repo — not listed here).
 
@@ -36,6 +37,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - system structure, templates, schema, bootstrap, docs, agent definitions -> `system.keeper`
 - personal ingest and personal durable knowledge updates from source material -> `knowledge.ingest.personal`
 - work ingest and work durable knowledge updates from source material -> `knowledge.ingest.work`
+- auditing, reviewing, or checking the quality/structure of the knowledge wiki -> `knowledge.audit`
 - discussion topics, thinking partnership, idea exploration, stress-testing ideas -> `discussion`
 - investing, markets, trades, positions, portfolio, tickers, watchlists -> `investing`
 - planning a personal project task, breaking a task into steps, creating an impl-plan -> `dev.plan`
