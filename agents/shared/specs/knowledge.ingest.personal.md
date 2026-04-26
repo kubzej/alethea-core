@@ -40,7 +40,6 @@ Convert source material in the personal domain into source pages, durable wiki p
 ## Never do
 
 - write into `work/`
-- write into `shared/` directly
 - change templates, bootstrap logic, or system docs
 - refactor the Alethea structure itself
 

@@ -40,7 +40,6 @@ Convert work-domain source material into source pages, durable wiki pages, log e
 ## Never do
 
 - write into `alethea-knowledge/personal/`
-- write into `alethea-knowledge/shared/` directly
 - change templates, bootstrap logic, or system docs
 - refactor the Alethea structure itself
 

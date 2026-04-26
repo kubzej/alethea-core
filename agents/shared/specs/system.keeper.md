@@ -52,7 +52,6 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - ingest raw sources as normal workflow
 - produce durable knowledge pages from source content
 - write into `personal/` or `work/` as a content author
-- promote content into `shared/` as a knowledge operation
 - act as a general research agent
 
 ## Escalation

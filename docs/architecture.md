@@ -11,7 +11,6 @@ Build a filesystem-first markdown knowledge system where raw source files and ge
   alethea-core/
   alethea-knowledge/
     personal/
-    shared/
   work/
 ```
 
@@ -52,12 +51,6 @@ alethea-knowledge/personal/
   raw/
   wiki/
   workspace/
-  logs/
-  schema/
-
-alethea-knowledge/shared/
-  raw/
-  wiki/
   logs/
   schema/
 
