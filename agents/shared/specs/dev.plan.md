@@ -20,6 +20,7 @@ Guide a task from description to a detailed, concrete implementation plan throug
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — phase and lifecycle tracking
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/high-level-plan.md` — optional strategic overview for larger tasks
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/impl-plan.md` — concrete step-by-step implementation plan
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
 
 ## Responsibilities
 
@@ -48,6 +49,29 @@ Guide a task from description to a detailed, concrete implementation plan throug
 - re-run explore if context.md already has an Exploration section
 - create plan files before the task-slug is approved
 - write outside `alethea-knowledge/personal/workspace/plans/`
+
+## Knowledge proposal
+
+Run this check when the plan is finalized and approved by the user — do not skip.
+
+Durable findings for `dev.plan`: architectural constraints discovered during planning (not the plan itself — the plan lives in workspace/plans/), assumptions that were explicitly rejected with rationale, dependencies or risks that shaped the plan and would apply to future work in the same area.
+
+Do NOT propose: the plan itself, task-specific decisions with no reuse value, things already in knowledge.md.
+
+If something durable was found, generate a proposal in this format:
+
+> **Knowledge proposal**
+> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
+> Section: `<Architecture Notes | Gotchas and Constraints | other>`
+>
+> Add:
+> ```
+> <exact text to add>
+> ```
+>
+> Write to knowledge.md? [Y/n]
+
+Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
 
 ## Delegation
 

@@ -50,7 +50,7 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 10. Route personal project code review, diff analysis, and Done-when verification to `dev.review`.
 11. Route personal project architectural decisions and design trade-offs to `dev.architect`.
 12. Route personal project test strategy, test planning, and test writing to `dev.test`.
-13. Route Sherlog project tasks to `project.sherlog` (spec: `work/agents/specs/project.sherlog.md`).
+13. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
 14. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
 15. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
 16. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.

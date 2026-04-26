@@ -10,7 +10,7 @@ The system of record is:
 
 Chat history is not the source of truth.
 
-## v1 ingest flow
+## Ingest flow
 
 1. Put source material into `raw/`.
 2. Create or update a source page in `wiki/sources/`.
@@ -127,4 +127,4 @@ Recommended sections:
 - maps of content
 - hand-written overviews
 
-Indexes are allowed to be partly generated later, but in v1 they should remain understandable and editable by hand.
+Indexes are allowed to be partly generated later, but should remain understandable and editable by hand.

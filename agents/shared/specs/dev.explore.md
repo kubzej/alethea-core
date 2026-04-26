@@ -18,6 +18,7 @@ Read a project deeply — architecture, patterns, affected areas, dependencies �
 
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — Exploration section only
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — initial phase and lifecycle
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
 
 ## Responsibilities
 
@@ -42,6 +43,29 @@ Read a project deeply — architecture, patterns, affected areas, dependencies �
 - skip exploration because the task "seems obvious"
 - create the plan folder or any artifact before the task-slug is approved
 - re-run exploration if context.md already has an Exploration section
+
+## Knowledge proposal
+
+Run this check after exploration is complete (when the agent has answered the user's question about the codebase) — do not skip.
+
+Durable findings for `dev.explore`: hidden coupling between modules, initialization ordering that isn't obvious from reading code, non-obvious caller relationships, gotchas that would trip up future work in this area.
+
+Do NOT propose: task-specific findings, things already in knowledge.md, anything obvious from reading the code.
+
+If something durable was found, generate a proposal in this format:
+
+> **Knowledge proposal**
+> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
+> Section: `<Gotchas and Constraints | Architecture Notes | other>`
+>
+> Add:
+> ```
+> <exact text to add>
+> ```
+>
+> Write to knowledge.md? [Y/n]
+
+Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
 
 ## Delegation
 

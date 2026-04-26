@@ -32,7 +32,7 @@ Examples:
 
 ## Status values
 
-Suggested v1 values:
+Suggested values:
 
 - `draft`
 - `active`

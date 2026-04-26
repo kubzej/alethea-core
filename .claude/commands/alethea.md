@@ -44,7 +44,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - reviewing code changes in a personal project, checking Done when conditions -> `dev.review`
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
-- Sherlog project tasks -> `project.sherlog` (spec: `work/agents/specs/project.sherlog.md`)
+- work project tasks -> route to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - work debugging, bug investigation, data anomalies -> `work.debug` (spec: `work/agents/specs/work.debug.md`)
 
 ## Core behavior

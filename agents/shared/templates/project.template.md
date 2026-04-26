@@ -1,4 +1,4 @@
-# `work.<project-name>`
+# `project.<project-name>`
 
 ## Role
 

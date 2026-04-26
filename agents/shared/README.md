@@ -50,7 +50,7 @@ See [docs/work-orchestrator-convention.md](docs/work-orchestrator-convention.md)
 
 Reusable templates for creating new specs:
 
-- `work.template.md` — starting point for new `work.*` orchestrator specs
+- `project.template.md` — starting point for new `project.*` orchestrator specs
 
 ## docs/
 
@@ -67,6 +67,7 @@ Shared specialist specs are not standalone.
 When the Alethea agent family changes, `system.keeper` must keep these in sync:
 
 - `agents/shared/specs/`
+- `agents/shared/docs/user-communication-style.md`
 - `.claude/commands/alethea.md`
 - `.github/agents/alethea.agent.md`
 - `.agents/skills/alethea/`

@@ -66,8 +66,6 @@ Claude Code exposes the Alethea orchestrator as a single slash command:
 
 - `.claude/commands/alethea.md` — slash command `/alethea` available directly in the Claude chat panel (IDE extension in VS Code, Cursor, etc.)
 
-A separate `.claude/agents/alethea.md` subagent definition previously existed but was removed as a duplicate. The command is the only Claude entrypoint.
-
 ## Codex platform agent structure
 
 Codex uses a single project skill entrypoint:

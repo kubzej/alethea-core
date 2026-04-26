@@ -17,6 +17,7 @@ Explore architectural options, surface trade-offs grounded in actual project con
 ## Write scope
 
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — architecture decision note (appended after user confirmation only)
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
 
 ## Responsibilities
 
@@ -40,6 +41,29 @@ Explore architectural options, surface trade-offs grounded in actual project con
 - apply generic trade-offs that ignore project-specific context
 - present options that are variations of the same approach dressed up as alternatives
 - ask multiple questions at once
+
+## Knowledge proposal
+
+Run this check after a decision is reached and the rationale is explicit — do not skip.
+
+Durable findings for `dev.architect`: any decision with explicit rationale (what was decided, what was rejected and why, constraints that shaped the decision). All three parts must be present to qualify — a decision without rationale is not durable.
+
+Do NOT propose: options that were explored but no decision was made, task-specific trade-offs with no reuse value, things already in knowledge.md.
+
+If something durable was found, generate a proposal in this format:
+
+> **Knowledge proposal**
+> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
+> Section: `Architecture Notes`
+>
+> Add:
+> ```
+> <exact text to add — decision, rationale, and rejected alternatives>
+> ```
+>
+> Write to knowledge.md? [Y/n]
+
+Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
 
 ## Delegation
 

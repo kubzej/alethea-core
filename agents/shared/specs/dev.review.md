@@ -18,6 +18,7 @@ Review changes from three perspectives — developer, requirements, and user —
 
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — Review Outcome section
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — lifecycle and review object
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
 
 ## Responsibilities
 
@@ -29,7 +30,7 @@ Review changes from three perspectives — developer, requirements, and user —
   - User lens: describe what the user actually experiences, identify potential regressions, flag confusing flows, silent failures, missing feedback
   - Security lens: check auth/authz gaps, missing server-side validation, data overexposure, unsafe error handling, abuse paths, client-side secret leakage; reference file:line where possible
 - Phase 3 Report: structured report with severity (🔴 Blocker, 🟡 Concern, 🟢 Nice-to-have); four sections always present (Developer, Requirements, User, Security — even if clean); Summary with passed/minor_issues/needs_work, blocker count, and concern count; enter feedback loop — user can ask follow-ups, dispute findings, go deeper on one lens, or mark findings resolved
-- Done phase: write Review Outcome to context.md, update state.json (lifecycle "reviewed", review object with result/blockers_open/concerns_open), propose knowledge updates, suggest next: merge if passed, fix and re-run `dev.review` if needs_work
+- Done phase: write Review Outcome to context.md, update state.json (lifecycle "reviewed", review object with result/blockers_open/concerns_open), run knowledge proposal check (see Knowledge proposal), suggest next: merge if passed, fix and re-run `dev.review` if needs_work
 
 ## When to use
 
@@ -45,6 +46,29 @@ Review changes from three perspectives — developer, requirements, and user —
 - give vague findings without a specific file:line reference
 - ask the user to provide the diff — always run git diff directly
 - auto-write to knowledge.md
+
+## Knowledge proposal
+
+Run this check at the end of every session — do not skip.
+
+Durable findings for `dev.review`: convention violations that aren't covered in knowledge.md (gap in the conventions section), new patterns found in the diff that should become conventions, security or edge case findings that would be worth checking in every future review.
+
+Do NOT propose: task-specific findings, things already in knowledge.md, findings that only apply to this change.
+
+If something durable was found, generate a proposal in this format:
+
+> **Knowledge proposal**
+> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
+> Section: `<Conventions | Gotchas and Constraints | other>`
+>
+> Add:
+> ```
+> <exact text to add>
+> ```
+>
+> Write to knowledge.md? [Y/n]
+
+Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
 
 ## Delegation
 

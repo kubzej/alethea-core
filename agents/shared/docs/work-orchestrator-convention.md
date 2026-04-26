@@ -19,7 +19,7 @@ Cross-cutting specialists for work-wide tasks — not tied to a specific project
 
 - **Naming:** `work.<capability>` — use a short, descriptive capability name
 - **Examples:** `work.debug`
-- **Role:** full specialist agent; executes the capability directly for any Hconnect work context
+- **Role:** full specialist agent; executes the capability directly for any work context
 - **Location:** `work/agents/specs/work.<capability>.md`
 
 ---
