@@ -52,10 +52,12 @@ Convert source material in the personal domain into source pages, durable wiki p
 
 1. **Enumerate first** — recursively list all folders and files in `alethea-knowledge/personal/raw/` before touching anything. Output the full list.
 2. **Declare scope** — for each item, state: new / modified (raw newer than wiki source) / unchanged. Don't start writing until this list is confirmed.
-3. **Date comparison** — compare each raw file's modification date against its corresponding source page in `alethea-knowledge/personal/wiki/sources/`. If no source page exists, treat it as new.
-4. **No skipping** — every file marked new or modified must be actually read and processed. Not inferred, not summarized from filename.
-5. **Explicit coverage** — when writing or updating a wiki page, list the raw files read to produce it.
-6. **Completeness check** — before declaring done, verify every raw folder has a source page and all new/modified files are processed. State this explicitly.
+3. **Check existing wiki for conflicts** — for each topic area touched by new or modified raw files, read the relevant existing wiki pages in `alethea-knowledge/personal/wiki/`. Identify any content the new material updates, contradicts, or extends. Note these findings before writing anything. Raw is a staging area that will be deleted; the wiki is the only durable record, so stale wiki content must be caught here.
+4. **Merge-first check** — before creating any new wiki page, list existing pages in the target wiki area and check for semantic overlap. If an existing page already covers the topic, update it instead of creating a new one. Only create a new page if no existing page covers the topic. State the decision (update or create) for each page.
+5. **Date comparison** — compare each raw file's modification date against its corresponding source page in `alethea-knowledge/personal/wiki/sources/`. If no source page exists, treat it as new.
+6. **No skipping** — every file marked new or modified must be actually read and processed. Not inferred, not summarized from filename.
+7. **Explicit coverage** — when writing or updating a wiki page, list the raw files read to produce it.
+8. **Completeness check** — before declaring done, verify every raw folder has a source page and all new/modified files are processed. State this explicitly.
 
 ## Parallel execution
 
@@ -78,5 +80,6 @@ After all folders are processed, run this lint checklist autonomously — no use
 4. No raw folder was declared "unchanged" without a date comparison having been performed
 5. An operations log entry exists in `alethea-knowledge/personal/logs/` for this ingest run
 6. No wiki page was silently overwritten with conflicting content — conflicts must be noted inline on the page
+7. No new wiki page was created where a merge-first check would have identified an existing page covering the same topic — flag any case where a new page and an existing page have substantial semantic overlap
 
 Output the lint result as a brief ✅/⚠️ list at the end of the ingest run.
