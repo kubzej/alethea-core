@@ -1,7 +1,7 @@
 ---
 name: alethea
 description: Routes Alethea system and ingest work to the correct specialist agent. Does not perform specialist work directly.
-tools: [read, search, agent]
+tools: [read, search, agent, edit, execute]
 user-invocable: true
 disable-model-invocation: false
 ---
