@@ -37,6 +37,16 @@ with these siblings:
 - `alethea-knowledge/` is the git-synced knowledge repo
 - `work/` is the local-only workspace root
 
+## Setup on a new machine
+
+```bash
+mkdir ~/path/to/alethea
+git clone https://github.com/kubzej/alethea-core.git ~/path/to/alethea/alethea-core
+~/path/to/alethea/alethea-core/scripts/bootstrap.sh
+```
+
+Bootstrap clones `alethea-knowledge`, creates the `work/` structure, and generates parent-level agent entrypoints so `/alethea` works when the `alethea/` folder is the IDE workspace root.
+
 ## Start here
 
 - Architecture: [docs/architecture.md](docs/architecture.md)

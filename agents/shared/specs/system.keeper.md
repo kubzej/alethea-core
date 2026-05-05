@@ -85,3 +85,5 @@ If the Alethea agent family changes, `system.keeper` must treat these as one uni
 - Codex skill in `.agents/skills/alethea/`
 
 No agent-family change is complete until all relevant roots reflect it.
+
+After updating any entrypoint in `alethea-core`, re-run `scripts/bootstrap.sh` to regenerate the parent-level copies in `alethea/`. The parent-level entrypoints are generated artifacts — edit only the `alethea-core` originals.
