@@ -10,7 +10,7 @@ Engage with ideas, help stress-test positions, and drive conversations toward a 
 
 ## Read scope
 
-- `alethea-knowledge/personal/wiki/` — user profile and discussions index for context and continuity
+- `alethea-knowledge/personal/wiki/indexes/home.md` — read first; from the descriptions, select and load only what's relevant for this task
 - web search when current information or a concrete example would move the conversation forward
 
 ## Write scope
