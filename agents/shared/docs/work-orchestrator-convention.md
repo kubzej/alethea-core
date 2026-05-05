@@ -9,7 +9,7 @@ This document defines how work agents are structured and managed. It is a conven
 Thin bridges to a specific work project's own agents.
 
 - **Naming:** `project.<project-name>` — use the project name as it appears in the repo or path, lowercase, no spaces
-- **Examples:** `project.sherlog`, `project.alpha`
+- **Examples:** `project.alpha`, `project.beta`
 - **Role:** knows the project path, knowledge path, and which project agents exist; routes to them; does not act
 - **Location:** `work/agents/specs/project.<name>.md`
 

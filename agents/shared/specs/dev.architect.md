@@ -16,8 +16,8 @@ Explore architectural options, surface trade-offs grounded in actual project con
 
 ## Write scope
 
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — architecture decision note (appended after user confirmation only)
-- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
+- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — append-only; always add a new `## dev.architect — YYYY-MM-DD HH:MM` section after user confirmation, never overwrite
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — direct write when something durable was found (see Knowledge write)
 
 ## Responsibilities
 
@@ -25,7 +25,7 @@ Explore architectural options, surface trade-offs grounded in actual project con
 - Before anything: load knowledge.md (Tech Stack, Conventions, Architecture Notes, Gotchas and Constraints); if a plan exists, read high-level-plan.md and the Exploration section from context.md
 - Step 1 Understand the problem: read relevant parts of the codebase (entry points and affected modules, existing patterns in the area of the decision, callers and consumers affected by each approach, constraints from knowledge.md Gotchas and Constraints and Architecture Notes); ask once if the decision depends on something that cannot be found; do not ask about things inferrable from context
 - Step 2 Generate options: 2–4 genuinely different approaches (not variations of the same idea); for each option provide: name, concrete description (1–3 sentences, specific enough to implement), trade-offs (pros and cons tied to this specific project and codebase), fits existing patterns (yes/partial/no with reason); after all options: recommendation only if one is clearly better given the constraints; if a genuine judgment call, say so explicitly — do not force a recommendation
-- Step 3 Save decision (optional): after presenting options, ask once "Want to save this as an architecture decision note?"; if yes — append to context.md with date, question, chosen approach, reason, and alternatives considered; direct write after confirmation
+- Step 3 Save decision (optional): after presenting options, ask once "Want to save this as an architecture decision note?"; if yes — append to context.md under `## dev.architect — YYYY-MM-DD HH:MM` with question, chosen approach, reason, and alternatives considered
 
 ## When to use
 
@@ -42,28 +42,15 @@ Explore architectural options, surface trade-offs grounded in actual project con
 - present options that are variations of the same approach dressed up as alternatives
 - ask multiple questions at once
 
-## Knowledge proposal
+## Knowledge write
 
 Run this check after a decision is reached and the rationale is explicit — do not skip.
 
 Durable findings for `dev.architect`: any decision with explicit rationale (what was decided, what was rejected and why, constraints that shaped the decision). All three parts must be present to qualify — a decision without rationale is not durable.
 
-Do NOT propose: options that were explored but no decision was made, task-specific trade-offs with no reuse value, things already in knowledge.md.
+Do NOT write: options that were explored but no decision was made, task-specific trade-offs with no reuse value, things already in knowledge.md.
 
-If something durable was found, generate a proposal in this format:
-
-> **Knowledge proposal**
-> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
-> Section: `Architecture Notes`
->
-> Add:
-> ```
-> <exact text to add — decision, rationale, and rejected alternatives>
-> ```
->
-> Write to knowledge.md? [Y/n]
-
-Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
+If something durable was found, write it directly to the Architecture Notes section of knowledge.md. If nothing durable was found, do nothing.
 
 ## Delegation
 

@@ -16,9 +16,8 @@ Read a project deeply — architecture, patterns, affected areas, dependencies �
 
 ## Write scope
 
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — Exploration section only
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — initial phase and lifecycle
-- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
+- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — append-only; always add a new `## dev.explore — YYYY-MM-DD HH:MM` section, never overwrite
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — direct write when something durable was found (see Knowledge write)
 
 ## Responsibilities
 
@@ -27,7 +26,7 @@ Read a project deeply — architecture, patterns, affected areas, dependencies �
 - Explore: read entry points (README, folder structure, key modules); trace relevant paths (follow call chains from entry to data layer); read surrounding context (scan module/directory for local patterns); find callers and consumers of whatever the task will touch; read files fully, not just the relevant function
 - Show findings structured as: Architecture (how the relevant part is structured, key patterns), Affected areas (files or modules the task will likely touch and why), Patterns to follow (conventions found that new code must align with), Risks (debt, inconsistency, missing abstraction), Open questions (genuine blockers only — keep minimal)
 - Propose task-slug: derive a short kebab-case slug from the task description (e.g. add-options-chain, fix-auth-bug); show it and wait for approval or correction before writing anything
-- After slug approval: create the plan folder if needed, write the Exploration section to context.md, create state.json with phase "explore", lifecycle "planning", and today's date
+- After slug approval: create the plan folder if needed, append exploration findings to context.md under `## dev.explore — YYYY-MM-DD HH:MM`
 - Suggest next: `dev.plan`
 
 ## When to use
@@ -44,28 +43,15 @@ Read a project deeply — architecture, patterns, affected areas, dependencies �
 - create the plan folder or any artifact before the task-slug is approved
 - re-run exploration if context.md already has an Exploration section
 
-## Knowledge proposal
+## Knowledge write
 
-Run this check after exploration is complete (when the agent has answered the user's question about the codebase) — do not skip.
+Run this check after exploration is complete — do not skip.
 
 Durable findings for `dev.explore`: hidden coupling between modules, initialization ordering that isn't obvious from reading code, non-obvious caller relationships, gotchas that would trip up future work in this area.
 
-Do NOT propose: task-specific findings, things already in knowledge.md, anything obvious from reading the code.
+Do NOT write: task-specific findings, things already in knowledge.md, anything obvious from reading the code.
 
-If something durable was found, generate a proposal in this format:
-
-> **Knowledge proposal**
-> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
-> Section: `<Gotchas and Constraints | Architecture Notes | other>`
->
-> Add:
-> ```
-> <exact text to add>
-> ```
->
-> Write to knowledge.md? [Y/n]
-
-Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
+If something durable was found, write it directly to the appropriate section of knowledge.md. If nothing durable was found, do nothing.
 
 ## Delegation
 

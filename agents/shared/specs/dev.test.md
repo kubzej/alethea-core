@@ -18,7 +18,6 @@ Reason deeply about what needs testing — not just the direct change but ripple
 
 - Project codebase — test files only, and only after user explicitly confirms writing
 - `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/test-plan.md` — concrete test plan
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — test object (started, updated, plan_written, tests_written; never touches lifecycle field)
 
 ## Responsibilities
 
@@ -28,7 +27,7 @@ Reason deeply about what needs testing — not just the direct change but ripple
 - Phase 2 Assess: reason about the change — do not apply a checklist blindly; categorize what changed (business logic/pure functions, data layer/API, UI components, integration points, configuration); reason about test types with yes/no and a reason for each — Unit (apply when non-trivial logic changed, skip for trivial wiring or config-only), Integration (apply when service boundaries or API handlers are involved), E2E (apply when a critical user flow is affected), Manual (apply when user-facing and hard to automate); go beyond the diff — what else calls or depends on changed code, what shared state or side effects, what non-obvious edge cases; show assessment and confirm scope before writing the plan
 - Phase 3 Plan: produce test-plan.md — each test item is concrete (what to test, what to assert, what edge cases to cover — not "test the service" but "assert that X returns Y when Z is null"); if a plan directory exists, write test-plan.md there; if standalone, show inline only; ask if the user wants test code written
 - Phase 4 Write (optional): follow established test patterns from knowledge.md Conventions section and existing test files; work through sections in priority order: unit first, then integration, then E2E; show the first test in each section before writing and wait for one confirmation, then continue the section; after writing each section, run tests using the command from knowledge.md Testing section and surface failures before continuing
-- Done phase: note test-plan.md location, update state.json test object, propose knowledge updates if new test conventions were discovered, suggest next: `dev.review` if not already done
+- Done phase: note test-plan.md location, run knowledge write check if new test conventions were discovered, suggest next: `dev.review` if not already done
 
 ## When to use
 
@@ -43,7 +42,7 @@ Reason deeply about what needs testing — not just the direct change but ripple
 - skip the orient phase
 - write test code without a plan
 - force all test types on every change — assess and justify each type
-- auto-write to knowledge.md
+- write to knowledge.md outside the task's project area
 - write test code without explicit user confirmation
 
 ## Delegation

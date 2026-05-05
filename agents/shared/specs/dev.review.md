@@ -12,13 +12,12 @@ Review changes from three perspectives — developer, requirements, and user —
 
 - Project codebase — git diff, git log, changed files, callers and consumers of changed functions, similar implementations elsewhere
 - `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — Conventions, Gotchas and Constraints, Tech Stack
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/` — state.json, context.md, impl-plan.md, high-level-plan.md
+- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/` — context.md, impl-plan.md, high-level-plan.md
 
 ## Write scope
 
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — Review Outcome section
-- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/state.json` — lifecycle and review object
-- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — on explicit user approval only (see Knowledge proposal)
+- `alethea-knowledge/personal/workspace/plans/<project>/<YYYY-MM-DD>-<slug>/context.md` — append-only; always add a new `## dev.review — YYYY-MM-DD HH:MM` section, never overwrite
+- `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md` — direct write when something durable was found (see Knowledge write)
 
 ## Responsibilities
 
@@ -30,7 +29,7 @@ Review changes from three perspectives — developer, requirements, and user —
   - User lens: describe what the user actually experiences, identify potential regressions, flag confusing flows, silent failures, missing feedback
   - Security lens: check auth/authz gaps, missing server-side validation, data overexposure, unsafe error handling, abuse paths, client-side secret leakage; reference file:line where possible
 - Phase 3 Report: structured report with severity (🔴 Blocker, 🟡 Concern, 🟢 Nice-to-have); four sections always present (Developer, Requirements, User, Security — even if clean); Summary with passed/minor_issues/needs_work, blocker count, and concern count; enter feedback loop — user can ask follow-ups, dispute findings, go deeper on one lens, or mark findings resolved
-- Done phase: write Review Outcome to context.md, update state.json (lifecycle "reviewed", review object with result/blockers_open/concerns_open), run knowledge proposal check (see Knowledge proposal), suggest next: merge if passed, fix and re-run `dev.review` if needs_work
+- Done phase: append review outcome to context.md under `## dev.review — YYYY-MM-DD HH:MM` (result: passed/minor_issues/needs_work, blocker count, concern count), run knowledge write check, suggest next: merge if passed, fix and re-run `dev.review` if needs_work
 
 ## When to use
 
@@ -45,30 +44,17 @@ Review changes from three perspectives — developer, requirements, and user —
 - omit a lens section — all four sections appear in every report, even if clean
 - give vague findings without a specific file:line reference
 - ask the user to provide the diff — always run git diff directly
-- auto-write to knowledge.md
+- write to knowledge.md outside the task's project area
 
-## Knowledge proposal
+## Knowledge write
 
 Run this check at the end of every session — do not skip.
 
 Durable findings for `dev.review`: convention violations that aren't covered in knowledge.md (gap in the conventions section), new patterns found in the diff that should become conventions, security or edge case findings that would be worth checking in every future review.
 
-Do NOT propose: task-specific findings, things already in knowledge.md, findings that only apply to this change.
+Do NOT write: task-specific findings, things already in knowledge.md, findings that only apply to this change.
 
-If something durable was found, generate a proposal in this format:
-
-> **Knowledge proposal**
-> File: `alethea-knowledge/personal/wiki/projects/<project>/knowledge.md`
-> Section: `<Conventions | Gotchas and Constraints | other>`
->
-> Add:
-> ```
-> <exact text to add>
-> ```
->
-> Write to knowledge.md? [Y/n]
-
-Wait for explicit Y before writing. If N or no response, do nothing. If nothing durable was found, generate no proposal.
+If something durable was found, write it directly to the appropriate section of knowledge.md. If nothing durable was found, do nothing.
 
 ## Delegation
 
