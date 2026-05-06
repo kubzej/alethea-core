@@ -50,6 +50,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route personal project test strategy, test planning, and test writing to `dev.test`
 - route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`)
+- route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
 
 ## Constraints
 

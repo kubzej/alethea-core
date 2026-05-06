@@ -54,9 +54,10 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 13. Route personal project test strategy, test planning, and test writing to `dev.test`.
 14. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
 15. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
-16. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
-17. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
-18. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
+16. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
+17. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+18. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
+19. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
 ## Codex handoff rule
 
