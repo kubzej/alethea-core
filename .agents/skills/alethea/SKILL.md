@@ -31,6 +31,7 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/dev.audit.md`
 - `agents/shared/specs/knowledge.audit.md`
 
 Work agent specs live in `work/agents/specs/` (private repo — not listed here).
@@ -52,12 +53,13 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 11. Route personal project code review, diff analysis, and Done-when verification to `dev.review`.
 12. Route personal project architectural decisions and design trade-offs to `dev.architect`.
 13. Route personal project test strategy, test planning, and test writing to `dev.test`.
-14. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
-15. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
-16. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
-17. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
-18. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
-19. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
+14. Route comprehensive personal project audits — full health checks, finding bugs/gaps/debt/UX/DX issues — to `dev.audit`.
+15. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
+16. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
+17. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
+18. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+19. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
+20. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
 ## Codex handoff rule
 

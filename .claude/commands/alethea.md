@@ -28,6 +28,7 @@ Read and route based on these canonical specs:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/dev.audit.md`
 - `agents/shared/specs/knowledge.audit.md`
 
 Work agent specs live in `work/agents/specs/` (private repo — not listed here).
@@ -46,6 +47,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - reviewing code changes in a personal project, checking Done when conditions -> `dev.review`
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
+- comprehensive audit of a personal project — finding bugs, gaps, debt, UX issues, DX issues -> `dev.audit`
 - work project tasks -> route to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - work debugging, bug investigation, data anomalies -> `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - work activity reconstruction, monthly recap, day-by-day reporting, timesheet support -> `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)

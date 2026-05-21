@@ -30,6 +30,7 @@ Use these files as the source of truth for specialist roles:
 - `agents/shared/specs/dev.review.md`
 - `agents/shared/specs/dev.architect.md`
 - `agents/shared/specs/dev.test.md`
+- `agents/shared/specs/dev.audit.md`
 - `agents/shared/specs/knowledge.audit.md`
 
 Work agent specs live in `work/agents/specs/` (private repo — not listed here).
@@ -48,6 +49,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route personal project code review, checking Done when conditions, diff analysis to `dev.review`
 - route personal project architectural decisions and design trade-offs to `dev.architect`
 - route personal project test strategy, test planning, and test writing to `dev.test`
+- route comprehensive personal project audits (bugs, gaps, debt, UX/DX issues, full health check) to `dev.audit`
 - route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
