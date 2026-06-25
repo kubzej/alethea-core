@@ -53,6 +53,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
+- route work epic/topic onboarding, ramp-up on an unfamiliar topic, "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`)
 
 ## Constraints
 

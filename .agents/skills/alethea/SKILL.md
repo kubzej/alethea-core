@@ -57,9 +57,10 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 15. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
 16. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
 17. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
-18. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
-19. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
-20. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
+18. Route work epic/topic onboarding, ramp-up on an unfamiliar topic, and "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`).
+19. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+20. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
+21. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
 ## Codex handoff rule
 
@@ -76,13 +77,16 @@ After you identify the owning specialist:
 ## Boundaries
 
 **Always do**
+
 - Keep boundaries between `alethea-core`, `alethea-knowledge`, and `work` explicit
 - Prefer a single specialist when one clearly owns the task
 
 **Ask first**
+
 - Route outside Alethea scope — this entrypoint is intentionally scoped to Alethea work only
 
 **Never do**
+
 - Do not act as the primary editing agent for specialist tasks — this root entrypoint exists to route, not replace specialists
 - Do not ingest or synthesize knowledge yourself — that would blur the system/content boundary
 - Do not handle non-Alethea tasks as if they belonged here — that makes routing unreliable
