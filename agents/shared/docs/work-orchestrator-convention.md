@@ -39,10 +39,10 @@ Alethea entrypoints reference them by name in routing rules only (no spec list e
 All knowledge for a work project goes to:
 
 ```
-alethea-knowledge/work/wiki/projects/<project-name>/
+work/wiki/projects/<project-name>/
 ```
 
-Never into `personal/`. Never scattered across ad hoc locations.
+This is the top-level, local-only `work/` domain — never `alethea-knowledge/` (which is the git-synced personal repo). Never into `personal/`. Never scattered across ad hoc locations.
 
 ---
 
@@ -58,8 +58,49 @@ Never into `personal/`. Never scattered across ad hoc locations.
 ## Lifecycle
 
 - **Created** when active work begins and routing is needed
-- **Deleted** when the project ends or the user stops working on it — no archiving, no migration; knowledge stays in `alethea-knowledge/work/`; spec file disappears
+- **Deleted** when the project ends or the user stops working on it — no archiving, no migration; knowledge stays in `work/wiki/`; spec file disappears
 - Deletion is clean by design: the spec is a thin pointer, not a content store
+
+---
+
+## Work domain lifecycle (job change)
+
+The section above is per-agent. This section is the whole-domain flow for changing jobs or moving to a new machine.
+
+The work **framework** is permanent and job-independent — it stays whether or not there is a current job:
+
+- this document
+- the `knowledge.ingest.work` spec
+- the `work/` scaffold that `bootstrap.sh` creates
+- the generic `project.*` / `work.*` routing patterns described in the entrypoints
+
+Only two things are job-specific and get attached or detached per job:
+
+- the contents of `work/` — local-only and unversioned (specs, wiki, raw, logs)
+- the concrete work-routing block in the three entrypoints, fenced by `<!-- work-routing:start -->` … `<!-- work-routing:end -->`
+
+### Detach — leaving a job
+
+1. `work/` is local-only and unversioned — it goes away with the machine or a manual delete. No git action. Confirm it is gone.
+2. In `alethea-core`, delete everything **between** the `work-routing` markers in all three entrypoints (leave the two marker lines in place as an empty slot for the next job):
+   - `.claude/commands/alethea.md`
+   - `.github/agents/alethea.agent.md`
+   - `.agents/skills/alethea/SKILL.md`
+3. Re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
+4. Commit `alethea-core`. Core now carries no job-specific work references — only the generic framework.
+
+Nothing else in `alethea-core` points at a specific job.
+
+### Attach — new job or new PC
+
+1. Run `scripts/bootstrap.sh` — recreates the `work/` scaffold and regenerates the parent entrypoints.
+2. Create work agents in `work/agents/specs/` (local-only): `project.<name>.md` orchestrators and any `work.<capability>.md` specialists. Start from `agents/shared/templates/project.template.md`.
+3. In `alethea-core`, add one routing line per work agent **inside** the `work-routing` markers of all three entrypoints. Routing lines only — never the specs themselves.
+4. Re-run `scripts/bootstrap.sh` to regenerate the parent entrypoints.
+5. Ingest work knowledge with `knowledge.ingest.work` into `work/wiki/`.
+6. Commit the entrypoint changes in `alethea-core`.
+
+`system.keeper` owns both flows and keeps the markers in sync across the three entrypoints.
 
 ---
 
@@ -67,24 +108,26 @@ Never into `personal/`. Never scattered across ad hoc locations.
 
 1. Create `work/agents/specs/project.<name>.md` (use existing project spec as template)
 2. Fill in: agent name, project path, knowledge path, project agents table
-3. Add routing rule to all three platform entrypoints (routing rule only — no spec list entry):
+3. Add routing rule to all three platform entrypoints, inside the `<!-- work-routing:start -->` … `<!-- work-routing:end -->` markers (routing rule only — no spec list entry):
    - `.claude/commands/alethea.md`
    - `.github/agents/alethea.agent.md`
    - `.agents/skills/alethea/SKILL.md`
+   Then re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
 
 ## How to add a new work specialist
 
 1. Create `work/agents/specs/work.<capability>.md`
-2. Add routing rule to all three platform entrypoints (routing rule only — no spec list entry):
+2. Add routing rule to all three platform entrypoints, inside the `<!-- work-routing:start -->` … `<!-- work-routing:end -->` markers (routing rule only — no spec list entry):
    - `.claude/commands/alethea.md`
    - `.github/agents/alethea.agent.md`
    - `.agents/skills/alethea/SKILL.md`
+   Then re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
 
 ## How to remove a work agent
 
 1. Delete `work/agents/specs/<agent>.md`
-2. Remove routing entries from all three platform entrypoints
-3. Leave `alethea-knowledge/work/wiki/projects/<project>/` in place — knowledge outlives the agent
+2. Remove the routing entries from inside the `work-routing` markers in all three platform entrypoints, then re-run `scripts/bootstrap.sh`
+3. Leave `work/wiki/projects/<project>/` in place — knowledge outlives the agent
 
 ---
 

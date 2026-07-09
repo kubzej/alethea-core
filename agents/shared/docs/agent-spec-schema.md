@@ -57,6 +57,22 @@ Use:
 - `Escalation` when the agent should hand off to a different owner
 - `Delegation` when the agent may remain the owner but sequence another role
 
+## Optional sections
+
+Beyond the eight required sections, a spec may add operational sections when the role genuinely needs them. These are allowed and should follow the naming below so specs stay comparable:
+
+- `Protocol` — a numbered, ordered procedure the agent must follow (e.g. ingest agents' `Ingest protocol`, `knowledge.audit`'s `Audit protocol`). Use when correctness depends on doing steps in a fixed order.
+- `Calibration` — how the agent adapts its behavior from stored context or past sessions (e.g. `discussion`, `investing`). Use for thinking-partner agents whose tone or depth must adjust to the user.
+- `Parallel execution` — how the agent fans work out to sub-agents. Use only when parallelism is part of the contract, not an implementation detail.
+- `Output format` — the exact shape of the agent's deliverable, when the format itself is load-bearing (e.g. `knowledge.audit`, `dev.audit`). Use when downstream consumers depend on a stable structure.
+- `Post-run lint` / checklist — self-verification the agent runs before declaring done (e.g. ingest agents' `Post-ingest lint`).
+
+Rules for optional sections:
+
+- Add one only when the role needs it — do not pad a spec to look complete.
+- Keep them operational, same as the required sections.
+- If several specs grow the same optional section, that is a signal it may belong in a shared doc instead of being duplicated per spec.
+
 ## Style rules
 
 - Keep the language operational, not aspirational.

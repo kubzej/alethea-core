@@ -28,6 +28,7 @@ All specialist agent specs:
 - `system.keeper`
 - `knowledge.ingest.personal`
 - `knowledge.ingest.work`
+- `knowledge.audit`
 - `discussion`
 - `investing`
 - `dev.plan`
@@ -36,6 +37,7 @@ All specialist agent specs:
 - `dev.review`
 - `dev.architect`
 - `dev.test`
+- `dev.audit`
 
 ### Work agents
 

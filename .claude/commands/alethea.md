@@ -48,10 +48,12 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
 - comprehensive audit of a personal project — finding bugs, gaps, debt, UX issues, DX issues -> `dev.audit`
+<!-- work-routing:start — job-specific; strip this block on job change (see agents/shared/docs/work-orchestrator-convention.md) -->
 - work project tasks -> route to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - work debugging, bug investigation, data anomalies -> `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - work activity reconstruction, monthly recap, day-by-day reporting, timesheet support -> `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
 - work epic/topic onboarding, ramp-up on an unfamiliar topic, "get me up to speed on X" -> `work.onboard` (spec: `work/agents/specs/work.onboard.md`)
+<!-- work-routing:end -->
 
 ## Core behavior
 

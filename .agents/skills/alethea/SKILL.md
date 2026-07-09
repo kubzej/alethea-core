@@ -54,10 +54,12 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 12. Route personal project architectural decisions and design trade-offs to `dev.architect`.
 13. Route personal project test strategy, test planning, and test writing to `dev.test`.
 14. Route comprehensive personal project audits — full health checks, finding bugs/gaps/debt/UX/DX issues — to `dev.audit`.
+<!-- work-routing:start — job-specific; strip this block on job change (see agents/shared/docs/work-orchestrator-convention.md) -->
 15. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
 16. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
 17. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
 18. Route work epic/topic onboarding, ramp-up on an unfamiliar topic, and "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`).
+<!-- work-routing:end -->
 19. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
 20. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
 21. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
