@@ -55,14 +55,20 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 13. Route personal project test strategy, test planning, and test writing to `dev.test`.
 14. Route comprehensive personal project audits — full health checks, finding bugs/gaps/debt/UX/DX issues — to `dev.audit`.
 <!-- work-routing:start — job-specific; strip this block on job change (see agents/shared/docs/work-orchestrator-convention.md) -->
-15. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
-16. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
-17. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
-18. Route work epic/topic onboarding, ramp-up on an unfamiliar topic, and "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`).
+15. Route generic work implementation planning, Jira/Confluence-backed feature planning, and work impl-plan creation to `work.dev.plan` (spec: `work/agents/specs/work.dev.plan.md`).
+16. Route work implementation plan verification, plan review, and skeptical plan validation to `work.dev.plan.review` (spec: `work/agents/specs/work.dev.plan.review.md`).
+17. Route generic work implementation, approved work plan execution, and build steps to `work.dev.build` (spec: `work/agents/specs/work.dev.build.md`).
+18. Route work branch, commit, MR/PR, Jira-key, or plan-based code review to `work.dev.review` (spec: `work/agents/specs/work.dev.review.md`).
+19. Route work test strategy, test planning, manual validation planning, and test writing to `work.dev.test` (spec: `work/agents/specs/work.dev.test.md`).
+20. Route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`).
+21. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
+22. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
+23. Route work epic/topic onboarding, ramp-up on an unfamiliar topic, and "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`).
 <!-- work-routing:end -->
-19. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
-20. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
-21. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
+24. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+25. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
+26. For generic work dev tasks, prefer the sequence `work.dev.plan` -> `work.dev.plan.review` -> `work.dev.build` -> `work.dev.test` -> `work.dev.review`; keep project-specific tasks with the matching `project.*` orchestrator when one exists.
+27. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
 ## Codex handoff rule
 

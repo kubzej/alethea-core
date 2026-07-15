@@ -51,6 +51,11 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route personal project test strategy, test planning, and test writing to `dev.test`
 - route comprehensive personal project audits (bugs, gaps, debt, UX/DX issues, full health check) to `dev.audit`
 <!-- work-routing:start — job-specific; strip this block on job change (see agents/shared/docs/work-orchestrator-convention.md) -->
+- route generic work implementation planning, Jira/Confluence-backed feature planning, and work impl-plan creation to `work.dev.plan` (spec: `work/agents/specs/work.dev.plan.md`)
+- route work implementation plan verification, plan review, and skeptical plan validation to `work.dev.plan.review` (spec: `work/agents/specs/work.dev.plan.review.md`)
+- route generic work implementation, approved work plan execution, and build steps to `work.dev.build` (spec: `work/agents/specs/work.dev.build.md`)
+- route work branch, commit, MR/PR, Jira-key, or plan-based code review to `work.dev.review` (spec: `work/agents/specs/work.dev.review.md`)
+- route work test strategy, test planning, manual validation planning, and test writing to `work.dev.test` (spec: `work/agents/specs/work.dev.test.md`)
 - route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
@@ -69,6 +74,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - prefer a single specialist when one clearly owns the request
 - if a task needs structural changes before ingest, delegate to `system.keeper` first
 - for dev tasks: prefer the most specific specialist — explore before plan, plan before build, test before review
+- for generic work dev tasks: prefer the sequence `work.dev.plan` -> `work.dev.plan.review` -> `work.dev.build` -> `work.dev.test` -> `work.dev.review`; keep project-specific tasks with the matching `project.*` orchestrator when one exists
 - for work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents
 - for cross-cutting work tasks (debug, etc.): route to the matching `work.*` specialist (spec in `work/agents/specs/`)
 - keep `alethea-core`, `alethea-knowledge`, and `work` boundaries clean
