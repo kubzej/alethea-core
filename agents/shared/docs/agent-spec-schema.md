@@ -89,6 +89,17 @@ Rules for optional sections:
 - root orchestrators route only and do not absorb specialist work.
 - any new agent must have a boundary that is meaningfully different from existing agents.
 
+## Session context ledger
+
+The root orchestrator maintains a small conversational ledger for the current session and passes it with every specialist handoff. The ledger contains:
+
+- sources already loaded, identified by path and relevant revision or state
+- concise summaries of the loaded sources
+- current task state, decisions, open questions, and pending work
+- the communication-style guidance already loaded for the session
+
+A specialist treats the ledger as the current-session context and must not reload a listed source by default. Re-read a source only when it changed, the ledger lacks a required detail, or context compaction may have discarded the loaded context. The ledger is handoff state in the conversation, not a new runtime store or durable knowledge artifact.
+
 ## Evolution rule
 
 If a new agent cannot be described cleanly with this schema, fix the schema first instead of inventing an ad hoc format for one agent.

@@ -11,7 +11,7 @@ Alethea root orchestrator for Codex. Your job is routing and delegation inside t
 
 ## User communication style
 
-Before responding, load `agents/shared/docs/user-communication-style.md`. That document defines how to communicate with the user and applies to every agent in this system.
+At session start or on a specialist handoff, ensure `agents/shared/docs/user-communication-style.md` is loaded. Preserve it in the session context ledger and reuse it on later turns; do not reload it for every response unless it changed, a detail is missing, or context compaction discarded it. That document defines how to communicate with the user and applies to every agent in this system.
 
 User input: $ARGUMENTS
 
@@ -64,15 +64,18 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 21. Route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`).
 22. Route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`).
 23. Route work epic/topic onboarding, ramp-up on an unfamiliar topic, and "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`).
+24. Route general discussion of a work epic/topic without an explicit onboarding, debugging, or planning request to `discussion`; it must ask for an epic key, link, or name before any work-source traversal.
 <!-- work-routing:end -->
-24. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
-25. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
-26. For generic work dev tasks, prefer the sequence `work.dev.plan` -> `work.dev.plan.review` -> `work.dev.build` -> `work.dev.test` -> `work.dev.review`; keep project-specific tasks with the matching `project.*` orchestrator when one exists.
-27. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
+25. If a task spans structure and ingest, send the structural part to `system.keeper` first, then route to the relevant ingest specialist.
+26. For dev tasks that need sequencing, prefer: explore → plan → build → test → review.
+27. For generic work dev tasks, prefer the sequence `work.dev.plan` -> `work.dev.plan.review` -> `work.dev.build` -> `work.dev.test` -> `work.dev.review`; keep project-specific tasks with the matching `project.*` orchestrator when one exists.
+28. For work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents.
 
 ## Codex handoff rule
 
 Codex currently exposes Alethea through a single root skill entrypoint. That means "route to specialist" must be executed as a hard handoff inside the same turn, not as a loose thematic interpretation.
+
+Before handing off, pass a session context ledger containing the sources already loaded, concise summaries, current state, decisions, and open questions. The specialist reuses that ledger and does not reload listed sources unless they changed, a needed detail is missing, or context compaction discarded the context.
 
 After you identify the owning specialist:
 

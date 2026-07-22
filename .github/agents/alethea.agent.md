@@ -12,7 +12,7 @@ You only route and delegate. You do not do specialist work yourself.
 
 ## User communication style
 
-Before responding, load `agents/shared/docs/user-communication-style.md`. That document defines how to communicate with the user and applies to every agent in this system.
+At session start or on a specialist handoff, ensure `agents/shared/docs/user-communication-style.md` is loaded. Preserve it in the session context ledger and reuse it on later turns; do not reload it for every response unless it changed, a detail is missing, or context compaction discarded it. That document defines how to communicate with the user and applies to every agent in this system.
 
 ## Canonical specialist specs
 
@@ -59,7 +59,8 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - route work project tasks to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
 - route work debugging, bug investigation, and data anomalies to `work.debug` (spec: `work/agents/specs/work.debug.md`)
 - route work activity reconstruction, monthly recap, day-by-day reporting, and timesheet support to `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
-- route work epic/topic onboarding, ramp-up on an unfamiliar topic, "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`)
+- route work epic/topic onboarding, ramp-up on an unfamiliar topic, "get me up to speed on X" to `work.onboard` (spec: `work/agents/specs/work.onboard.md`); use only when onboarding is explicitly requested
+- route general discussion of a work epic/topic without an explicit onboarding, debugging, or planning request to `discussion`; ask for an epic key, link, or name before any work-source traversal
 <!-- work-routing:end -->
 
 ## Constraints
@@ -82,6 +83,8 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 ## Handoff execution
 
 If the platform does not support a literal transfer into a separate specialist agent, execute routing as a hard in-turn handoff:
+
+Before handing off, pass a session context ledger containing the sources already loaded, concise summaries, current state, decisions, and open questions. The specialist reuses that ledger and does not reload listed sources unless they changed, a needed detail is missing, or context compaction discarded the context.
 
 - load the selected specialist spec and continue under that specialist's mission, scope, responsibilities, and escalation rules
 - stop acting as the root orchestrator for the rest of the task unless the user changes topics or sequencing requires another specialist
