@@ -59,7 +59,7 @@ One umbrella workspace, three repos with clean boundaries:
 
 ## Setup on a new machine
 
-Requires Bash, Git, standard shell utilities, and `jq`.
+Requires Bash, Git, standard shell utilities (including `shasum` or `sha256sum`), and `jq`.
 
 ```bash
 mkdir ~/path/to/alethea
@@ -73,9 +73,13 @@ workspace root.
 
 Core templates remain employer-independent. Optional `work/agents/routing.md` and
 `work/agents/entrypoint.json` supply local routing and additional Copilot tools;
-`work/agents/contract.md` supplies local policy to shared specialists. These inputs
-are never copied into core. Regenerate after attaching, changing, or removing the
-local extension. See [Work agent convention](agents/shared/docs/work-orchestrator-convention.md).
+`work/agents/contract.md` supplies local policy to shared specialists. Optional native
+agents, slash prompts, commands and skills in `work/agents/entrypoints/` are installed
+verbatim at matching workspace paths, with private ownership state in
+`.alethea/entrypoints.json`. Modified or unmanaged outputs block replacement; detach
+removes only unchanged managed private entrypoints. These inputs are never copied
+into core. Regenerate after attaching, changing, or removing the local extension.
+See [Work agent convention](agents/shared/docs/work-orchestrator-convention.md).
 
 Run the isolated bootstrap regression checks with `bash tests/bootstrap_test.sh`
 from this repo. They use synthetic work fixtures, no real work sources or network.

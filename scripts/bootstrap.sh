@@ -95,7 +95,7 @@ This is the Alethea workspace root. It contains three repos:
 - `alethea-knowledge/` — git-synced personal knowledge
 - `work/` — local-only work workspace
 
-Use `/alethea` to start any Alethea task. Agent specs live in `alethea-core/agents/shared/specs/`.
+Use `/alethea` for routed tasks. Optional local entrypoints may execute directly under their selected role. Agent specs live in `alethea-core/agents/shared/specs/`.
 EOF
 
 echo "Done. Alethea scaffold ensured under: $ROOT"

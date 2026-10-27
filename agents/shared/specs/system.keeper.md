@@ -32,6 +32,7 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - maintain `agents/shared/docs/agent-spec-schema.md`
 - maintain `agents/shared/docs/user-communication-style.md` and ensure all platform entrypoints load it
 - keep shared agent specs and platform entrypoints aligned
+- synchronize native entrypoints, tool declarations and source-access capability inventories when scripts, tools, contracts or agents are added, changed or removed; follow applicable local contracts and keep concrete inventories and policies private
 - enforce publishable core: employer-specific routing, tools, source details, and policies belong only in the local work extension, never in core files or test fixtures
 - when adding, removing, or renaming an Alethea agent, update all platform entrypoints that reference the agent family
 - make structural refactors that improve consistency
@@ -89,4 +90,6 @@ If the Alethea agent family changes, `system.keeper` must treat these as one uni
 
 No agent-family change is complete until all relevant roots reflect it.
 
-After updating an entrypoint or the local work extension, re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints in `alethea/`. They combine generic core templates with optional `work/agents/routing.md` and `work/agents/entrypoint.json`. Edit generic behavior in core and concrete work behavior only in `work/`; never copy a generated entrypoint back into core. Follow `agents/shared/docs/work-orchestrator-convention.md` for the extension contract.
+Script, tool, contract and agent lifecycle changes also require checking affected native entrypoints, tool declarations and the source-access capability inventory against the applicable local contracts. Do not infer actual tool availability from a declaration alone. Maintain concrete capabilities and policies only in the local extension, never in core.
+
+After updating an entrypoint or the local work extension, re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints in `alethea/`. They combine generic core templates with optional `work/agents/routing.md` and `work/agents/entrypoint.json`, and install optional private templates from `work/agents/entrypoints/`. Respect managed-output conflicts; never bypass ownership checks or overwrite local edits. When execution is explicitly scoped to core only, validate with isolated bootstrap tests and hand workspace regeneration back to the caller. Edit generic behavior in core and concrete work behavior only in `work/`; never copy a generated entrypoint back into core. Follow `agents/shared/docs/work-orchestrator-convention.md` for the extension contract.
