@@ -53,7 +53,7 @@ If `$ARGUMENTS` is empty, ask: "What do you want to do in Alethea?"
 11. Route personal project code review, diff analysis, and Done-when verification to `dev.review`.
 12. Route personal project architectural decisions and design trade-offs to `dev.architect`.
 13. Route personal project test strategy, test planning, and test writing to `dev.test`.
-14. Route comprehensive personal project audits — full health checks, finding bugs/gaps/debt/UX/DX issues — to `dev.audit`.
+14. Route comprehensive personal project audits — full health checks, finding bugs/gaps/debt/UX/DX/security issues — to `dev.audit`.
     <!-- work-routing:start -->
     <!-- work-routing:end -->
 

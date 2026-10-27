@@ -47,7 +47,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - reviewing code changes in a personal project, checking Done when conditions -> `dev.review`
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
-- comprehensive audit of a personal project — finding bugs, gaps, debt, UX issues, DX issues -> `dev.audit`
+- comprehensive audit of a personal project — finding bugs, gaps, debt, UX issues, DX issues, security issues -> `dev.audit`
   <!-- work-routing:start -->
   <!-- work-routing:end -->
 
