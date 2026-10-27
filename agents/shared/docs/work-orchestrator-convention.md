@@ -18,7 +18,7 @@ Thin bridges to a specific work project's own agents.
 Cross-cutting specialists for work-wide tasks — not tied to a specific project.
 
 - **Naming:** `work.<capability>` — use a short, descriptive capability name
-- **Examples:** `work.debug`, `work.activity.timeline`
+- **Examples:** `work.inspect`, `work.report`
 - **Role:** full specialist agent; executes the capability directly for any work context
 - **Location:** `work/agents/specs/work.<capability>.md`
 
@@ -30,7 +30,13 @@ Work agent specs contain company-specific content (project paths, infra details,
 
 **All work agent specs go in:** `work/agents/specs/`
 
-Alethea entrypoints reference them by name in routing rules only (no spec list entry).
+Concrete routing lives only in `work/agents/routing.md`. Bootstrap inserts it into local workspace entrypoints, never into the core templates or specialist list.
+
+## Safety rule
+
+Core must remain publishable and employer-independent at all times, not only after leaving a job. It may define the generic work boundary, scaffold, role interfaces, and local extension mechanism. It must not contain employer-specific names, services, endpoints, repository paths, source content, tool identifiers, skills, policies, or concrete work routing, including in examples and tests. Use synthetic fixtures only.
+
+Keep the `work-routing` slots in all three core templates empty. Never copy a generated workspace entrypoint back into core. Generic references to the optional local contract are allowed; its contents stay in `work/`. Review changed and staged files before publishing. Cleaning source files does not remove historical Git metadata or previously committed content; history or identity changes need separate explicit authorization.
 
 ---
 
@@ -67,40 +73,35 @@ This is the top-level, local-only `work/` domain — never `alethea-knowledge/` 
 
 The section above is per-agent. This section is the whole-domain flow for changing jobs or moving to a new machine.
 
-The work **framework** is permanent and job-independent — it stays whether or not there is a current job:
+The work framework is permanent and job-independent: this document, the generic `knowledge.ingest.work` role, the `work/` scaffold, and the extension interface. Concrete work contents and configuration are private/local and must not be synced through core or personal knowledge.
 
-- this document
-- the `knowledge.ingest.work` spec
-- the `work/` scaffold that `bootstrap.sh` creates
-- the generic `project.*` / `work.*` routing patterns described in the entrypoints
+### Local extension interface
 
-Only two things are job-specific and get attached or detached per job:
+- `work/agents/routing.md`: optional Markdown routing and handoff rules, inserted between the `work-routing` markers in all three generated workspace entrypoints. Do not include those markers in the input itself.
+- `work/agents/entrypoint.json`: optional JSON object with a `tools` array of nonempty single-line strings. Only this key is accepted. Tools are added to the generated Copilot agent's base permissions and deduplicated; no other frontmatter is overridden.
+- `work/agents/contract.md`: optional local operating policy loaded by shared specialists for work tasks. Provider-specific retrieval, source priority, and synchronization rules belong here or in local docs it references.
 
-- the contents of `work/` — local-only and unversioned (specs, wiki, raw, logs)
-- the concrete work-routing block in the three entrypoints, fenced by `<!-- work-routing:start -->` … `<!-- work-routing:end -->`
+Paths in the local routing must be workspace-root relative. Bootstrap rewrites shared core paths before inserting the local routing, so already-qualified local references are preserved. No inputs means generic entrypoints with no job-specific routing or tools. A client other than Copilot needs its own local tool access setup; generated routing does not configure a server.
+
+Bootstrap uses Bash, standard shell utilities, and `jq`. The core agent's `tools` field must be a JSON string array, which is also valid YAML; keep its `prettier-ignore` directive so formatting does not convert it into another YAML representation. Single-line and indented multiline JSON arrays are supported. Only this field is parsed and replaced; other frontmatter is preserved. Routing markers may be indented, but their slot must stay empty in core.
+
+Configuration and all templates are validated and rendered in a temporary directory before writing any entrypoint or cloning a missing knowledge repository; invalid configuration stops generation. Repeated generation is idempotent and never writes work data into core. Bootstrap writes generated workspace entrypoints, so keep durable edits in the appropriate core template or local extension, not in generated copies. Run `bash tests/bootstrap_test.sh` from core to verify the extension boundary.
 
 ### Detach — leaving a job
 
-1. `work/` is local-only and unversioned — it goes away with the machine or a manual delete. No git action. Confirm it is gone.
-2. In `alethea-core`, delete everything **between** the `work-routing` markers in all three entrypoints (leave the two marker lines in place as an empty slot for the next job):
-   - `.claude/commands/alethea.md`
-   - `.github/agents/alethea.agent.md`
-   - `.agents/skills/alethea/SKILL.md`
-3. Re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
-4. Commit `alethea-core`. Core now carries no job-specific work references — only the generic framework.
-
-Nothing else in `alethea-core` points at a specific job.
+1. With explicit user approval, remove or securely relocate the private work data and local extension. Never delete work knowledge automatically as part of a bootstrap.
+2. Re-run `scripts/bootstrap.sh`. Missing local inputs remove previously generated work routing and tool additions; the generic scaffold is recreated.
+3. Verify the three generated entrypoints no longer contain the detached routing or tools. Core requires no employer-specific edit or commit.
 
 ### Attach — new job or new PC
 
-1. Run `scripts/bootstrap.sh` — recreates the `work/` scaffold and regenerates the parent entrypoints.
-2. Create work agents in `work/agents/specs/` (local-only): `project.<name>.md` orchestrators and any `work.<capability>.md` specialists. Start from `agents/shared/templates/project.template.md`.
-3. In `alethea-core`, add one routing line per work agent **inside** the `work-routing` markers of all three entrypoints. Routing lines only — never the specs themselves.
-4. Re-run `scripts/bootstrap.sh` to regenerate the parent entrypoints.
-5. Ingest work knowledge with `knowledge.ingest.work` into `work/wiki/`.
-6. Commit the entrypoint changes in `alethea-core`.
+1. Run `scripts/bootstrap.sh` to create the generic scaffold.
+2. Create private work specs in `work/agents/specs/`; start project orchestrators from `agents/shared/templates/project.template.md`.
+3. Add concrete routing, tools, and operating policy to the local extension files above, not core. Configure and authenticate external clients locally without storing secrets in these files.
+4. Re-run bootstrap and verify generated routing, tool permissions, and actual tool availability in the intended client.
+5. Ingest work knowledge into `work/wiki/` through `knowledge.ingest.work` when requested or required by the local contract.
 
-`system.keeper` owns both flows and keeps the markers in sync across the three entrypoints.
+`system.keeper` owns both flows and the generic extension interface. Attaching or changing a job must not require employer-specific changes in core.
 
 ---
 
@@ -108,25 +109,17 @@ Nothing else in `alethea-core` points at a specific job.
 
 1. Create `work/agents/specs/project.<name>.md` (use existing project spec as template)
 2. Fill in: agent name, project path, knowledge path, project agents table
-3. Add routing rule to all three platform entrypoints, inside the `<!-- work-routing:start -->` … `<!-- work-routing:end -->` markers (routing rule only — no spec list entry):
-   - `.claude/commands/alethea.md`
-   - `.github/agents/alethea.agent.md`
-   - `.agents/skills/alethea/SKILL.md`
-   Then re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
+3. Add its routing rule to `work/agents/routing.md`, then re-run `scripts/bootstrap.sh`. Do not modify the core entrypoint slots.
 
 ## How to add a new work specialist
 
 1. Create `work/agents/specs/work.<capability>.md`
-2. Add routing rule to all three platform entrypoints, inside the `<!-- work-routing:start -->` … `<!-- work-routing:end -->` markers (routing rule only — no spec list entry):
-   - `.claude/commands/alethea.md`
-   - `.github/agents/alethea.agent.md`
-   - `.agents/skills/alethea/SKILL.md`
-   Then re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints.
+2. Add its routing rule to `work/agents/routing.md`, then re-run `scripts/bootstrap.sh`. Keep concrete tool additions in `work/agents/entrypoint.json` only.
 
 ## How to remove a work agent
 
 1. Delete `work/agents/specs/<agent>.md`
-2. Remove the routing entries from inside the `work-routing` markers in all three platform entrypoints, then re-run `scripts/bootstrap.sh`
+2. Remove its entries from the local routing and any unused local tool permissions, then re-run `scripts/bootstrap.sh`
 3. Leave `work/wiki/projects/<project>/` in place — knowledge outlives the agent
 
 ---

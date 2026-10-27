@@ -32,6 +32,7 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - maintain `agents/shared/docs/agent-spec-schema.md`
 - maintain `agents/shared/docs/user-communication-style.md` and ensure all platform entrypoints load it
 - keep shared agent specs and platform entrypoints aligned
+- enforce publishable core: employer-specific routing, tools, source details, and policies belong only in the local work extension, never in core files or test fixtures
 - when adding, removing, or renaming an Alethea agent, update all platform entrypoints that reference the agent family
 - make structural refactors that improve consistency
 - create or revise Alethea-specific agents
@@ -53,6 +54,8 @@ It is also the reference owner for the Alethea agent contract and agent-family c
 - produce durable knowledge pages from source content
 - write into `personal/` or `work/` as a content author
 - act as a general research agent
+- copy local work configuration or generated workspace entrypoints back into core
+- rewrite Git identity or history as part of source cleanup without separate explicit authorization
 
 ## Escalation
 
@@ -86,4 +89,4 @@ If the Alethea agent family changes, `system.keeper` must treat these as one uni
 
 No agent-family change is complete until all relevant roots reflect it.
 
-After updating any entrypoint in `alethea-core`, re-run `scripts/bootstrap.sh` to regenerate the parent-level copies in `alethea/`. The parent-level entrypoints are generated artifacts — edit only the `alethea-core` originals.
+After updating an entrypoint or the local work extension, re-run `scripts/bootstrap.sh` to regenerate the parent-level entrypoints in `alethea/`. They combine generic core templates with optional `work/agents/routing.md` and `work/agents/entrypoint.json`. Edit generic behavior in core and concrete work behavior only in `work/`; never copy a generated entrypoint back into core. Follow `agents/shared/docs/work-orchestrator-convention.md` for the extension contract.

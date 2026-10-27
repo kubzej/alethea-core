@@ -3,8 +3,8 @@
  █▀█ █▄▄ ██▄ ░█░ █▀█ ██▄ █▀█
 ```
 
-> **ἀλήθεια** · *aletheia* — truth as **unconcealment**.
-> Not facts stored, but knowledge brought out of hiding and kept from *lethe*, forgetting.
+> **ἀλήθεια** · _aletheia_ — truth as **unconcealment**.
+> Not facts stored, but knowledge brought out of hiding and kept from _lethe_, forgetting.
 
 **Alethea Core** is the tooling, conventions, and agent layer of a filesystem-first
 markdown knowledge system. Plain text is the durable artifact. The chat is not the
@@ -39,6 +39,7 @@ The gradient is the point: material moves from hidden to disclosed.
 
 - durable knowledge content — that lives in `alethea-knowledge/`
 - local workspace content — that lives in `work/`
+- employer-specific names, integrations, source details, tool permissions, policies, and concrete work routing, including in examples and tests
 - Obsidian-specific state as a required backend layer
 
 ## Workspace model
@@ -58,6 +59,8 @@ One umbrella workspace, three repos with clean boundaries:
 
 ## Setup on a new machine
 
+Requires Bash, Git, standard shell utilities, and `jq`.
+
 ```bash
 mkdir ~/path/to/alethea
 git clone https://github.com/kubzej/alethea-core.git ~/path/to/alethea/alethea-core
@@ -68,17 +71,29 @@ Bootstrap clones `alethea-knowledge`, creates the `work/` structure, and generat
 parent-level agent entrypoints so `/alethea` works when the `alethea/` folder is the IDE
 workspace root.
 
+Core templates remain employer-independent. Optional `work/agents/routing.md` and
+`work/agents/entrypoint.json` supply local routing and additional Copilot tools;
+`work/agents/contract.md` supplies local policy to shared specialists. These inputs
+are never copied into core. Regenerate after attaching, changing, or removing the
+local extension. See [Work agent convention](agents/shared/docs/work-orchestrator-convention.md).
+
+Run the isolated bootstrap regression checks with `bash tests/bootstrap_test.sh`
+from this repo. They use synthetic work fixtures, no real work sources or network.
+
 ## Start here
 
-| | |
-|---|---|
-| Architecture | [docs/architecture.md](docs/architecture.md) |
-| Lifecycle | [docs/lifecycle.md](docs/lifecycle.md) |
-| Conventions | [docs/conventions.md](docs/conventions.md) |
-| Agents | [agents/shared/README.md](agents/shared/README.md) |
-| Bootstrap | [scripts/bootstrap.sh](scripts/bootstrap.sh) |
+|              |                                                    |
+| ------------ | -------------------------------------------------- |
+| Architecture | [docs/architecture.md](docs/architecture.md)       |
+| Lifecycle    | [docs/lifecycle.md](docs/lifecycle.md)             |
+| Conventions  | [docs/conventions.md](docs/conventions.md)         |
+| Agents       | [agents/shared/README.md](agents/shared/README.md) |
+| Bootstrap    | [scripts/bootstrap.sh](scripts/bootstrap.sh)       |
 
 ---
 
 <sub>Against forgetting.</sub>
+
+```
+
 ```

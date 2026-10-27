@@ -48,18 +48,10 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - architectural decisions and design trade-offs in a personal project -> `dev.architect`
 - test strategy, test planning, or writing tests for a personal project -> `dev.test`
 - comprehensive audit of a personal project — finding bugs, gaps, debt, UX issues, DX issues -> `dev.audit`
-<!-- work-routing:start — job-specific; strip this block on job change (see agents/shared/docs/work-orchestrator-convention.md) -->
-- generic work implementation planning, Jira/Confluence-backed feature planning, work impl-plan creation -> `work.dev.plan` (spec: `work/agents/specs/work.dev.plan.md`)
-- work implementation plan verification, plan review, skeptical plan validation -> `work.dev.plan.review` (spec: `work/agents/specs/work.dev.plan.review.md`)
-- generic work implementation, approved work plan execution, build steps -> `work.dev.build` (spec: `work/agents/specs/work.dev.build.md`)
-- work branch, commit, MR/PR, Jira-key, or plan-based code review -> `work.dev.review` (spec: `work/agents/specs/work.dev.review.md`)
-- work test strategy, test planning, manual validation planning, test writing -> `work.dev.test` (spec: `work/agents/specs/work.dev.test.md`)
-- work project tasks -> route to the matching `project.*` orchestrator (spec in `work/agents/specs/`)
-- work debugging, bug investigation, data anomalies -> `work.debug` (spec: `work/agents/specs/work.debug.md`)
-- work activity reconstruction, monthly recap, day-by-day reporting, timesheet support -> `work.activity.timeline` (spec: `work/agents/specs/work.activity.timeline.md`)
-- work epic/topic onboarding, ramp-up on an unfamiliar topic, "get me up to speed on X" -> `work.onboard` (spec: `work/agents/specs/work.onboard.md`); use only when onboarding is explicitly requested
-- general discussion of a work epic/topic without an explicit onboarding, debugging, or planning request -> `discussion`; ask for an epic key, link, or name before any work-source traversal
-<!-- work-routing:end -->
+  <!-- work-routing:start -->
+  <!-- work-routing:end -->
+
+Work-specific routing and tool permissions are supplied only by the optional local extension described in `agents/shared/docs/work-orchestrator-convention.md`. If a work task has no configured owner, surface the missing local configuration instead of inventing a route. Never add employer-specific content or tool identifiers to core.
 
 ## Core behavior
 
@@ -67,9 +59,7 @@ Work agent specs live in `work/agents/specs/` (private repo — not listed here)
 - then delegate to exactly one specialist unless the task clearly needs sequencing
 - if sequencing is needed, route to `system.keeper` first for structural work, then to the relevant ingest specialist
 - for dev tasks: prefer the most specific specialist — explore before plan, plan before build, test before review
-- for generic work dev tasks: prefer the sequence `work.dev.plan` -> `work.dev.plan.review` -> `work.dev.build` -> `work.dev.test` -> `work.dev.review`; keep project-specific tasks with the matching `project.*` orchestrator when one exists
-- for work project tasks: route to the matching `project.*` orchestrator (spec in `work/agents/specs/`), which delegates to the project's own agents
-- for cross-cutting work tasks (debug, etc.): route to the matching `work.*` specialist (spec in `work/agents/specs/`)
+- for work tasks, follow the locally supplied routing and pass its applicable contract and session ledger to the selected specialist
 - preserve clean boundaries between `alethea-core`, `alethea-knowledge`, and `work`
 
 ## Handoff execution

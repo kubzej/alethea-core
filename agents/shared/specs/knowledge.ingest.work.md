@@ -14,6 +14,7 @@ Convert work-domain source material into source pages, durable wiki pages, log e
 - `work/wiki/`
 - `work/logs/`
 - `work/schema/`
+- `work/agents/contract.md`, when present, and attributed source evidence in the session ledger
 - shared templates and lifecycle docs in `alethea-core/`
 
 ## Write scope
@@ -30,12 +31,14 @@ Convert work-domain source material into source pages, durable wiki pages, log e
 - add or update curated index links when needed
 - record meaningful ingest operations in the work operations log
 - keep draft or uncertain synthesis in `work/workspace/` instead of forcing it into durable wiki
+- process external-source handoffs under the local work contract, preserving provenance and uncertainty
 
 ## When to use
 
 - a new work source should enter the knowledge system
 - an existing work source needs a better source page
 - a durable work page should be synthesized or refreshed from source material
+- a work task discovers new durable information or a conflict with local work knowledge
 
 ## Never do
 
@@ -47,6 +50,12 @@ Convert work-domain source material into source pages, durable wiki pages, log e
 
 - if schema or templates are the problem, hand off to `system.keeper`
 - if material seems appropriate for cross-domain reuse, propose promotion rather than doing it directly
+
+## Input selection
+
+For raw-file ingestion, use the existing ingest protocol below. For an attributed external-source handoff, load the optional `work/agents/contract.md` and follow its scoped source protocol. Source integrations, priorities, and provider-specific metadata rules belong in that local contract, never in core. Do not enumerate unrelated raw folders or invent a staged raw file for an external-source update. Mixed requests apply each protocol only to its declared source scope.
+
+Every scoped update still requires a merge-first check, source attribution, explicit handling of conflicts and uncertainty, relevant index updates, an operation log, and verification of declared coverage. Honor explicit read-only/no-ingest requests. If required local configuration or evidence is missing, report the blocker instead of inventing source behavior.
 
 ## Ingest protocol
 
@@ -70,9 +79,13 @@ After the scope declaration (step 2 of the ingest protocol), spawn one sub-agent
 
 Sub-agents write directly to `work/wiki/` — no intermediate buffers or staging area. Once all sub-agents complete, a coordinating agent collects their results and writes the final operations log entry for the run. This replaces serial folder-by-folder processing.
 
+This raw-folder parallelization does not apply to scoped external-source handoffs; follow the local contract instead.
+
 ## Post-ingest lint
 
 After all folders are processed, run this lint checklist autonomously — no user interaction required. Fix any ✅-able issues silently. Surface ⚠️ items in the output.
+
+For an external-source-only update, raw-folder checks 1, 2, and 4 are not applicable; verify source coverage and provenance under the local contract, and still apply checks 3, 5, 6, and 7.
 
 1. Every raw folder marked new or modified has a corresponding source page in `work/wiki/sources/`
 2. Every source page lists which raw files were read to produce it

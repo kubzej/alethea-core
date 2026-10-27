@@ -19,13 +19,6 @@ ensure_file() {
   fi
 }
 
-generate_entrypoint() {
-  local src="$1"
-  local dst="$2"
-  ensure_dir "$(dirname "$dst")"
-  sed 's|agents/shared/|alethea-core/agents/shared/|g' "$src" > "$dst"
-}
-
 if [ "$(basename "$ROOT")" != "alethea" ]; then
   echo "Error: expected parent folder to be named 'alethea', got '$(basename "$ROOT")'."
   echo "Clone alethea-core into alethea/alethea-core/ and run bootstrap from there."
@@ -33,6 +26,8 @@ if [ "$(basename "$ROOT")" != "alethea" ]; then
 fi
 
 echo "Alethea bootstrap — root: $ROOT"
+
+bash "$CORE_DIR/scripts/generate_entrypoints.sh" "$ROOT" --check
 
 # --- clone alethea-knowledge if missing ---
 if [ ! -d "$KNOWLEDGE_DIR/.git" ]; then
@@ -83,20 +78,13 @@ ensure_file "$WORK_DIR/logs/operations.md"
 # --- parent-level entrypoints (generated, not versioned) ---
 echo "Generating parent-level entrypoints..."
 
-generate_entrypoint \
-  "$CORE_DIR/.claude/commands/alethea.md" \
-  "$ROOT/.claude/commands/alethea.md"
+bash "$CORE_DIR/scripts/generate_entrypoints.sh" "$ROOT"
 
-generate_entrypoint \
-  "$CORE_DIR/.github/agents/alethea.agent.md" \
-  "$ROOT/.github/agents/alethea.agent.md"
-
-generate_entrypoint \
-  "$CORE_DIR/.agents/skills/alethea/SKILL.md" \
-  "$ROOT/.agents/skills/alethea/SKILL.md"
-
-cp "$CORE_DIR/.agents/skills/alethea/agents/openai.yaml" \
-   "$ROOT/.agents/skills/alethea/agents/openai.yaml" 2>/dev/null || true
+if [ -f "$CORE_DIR/.agents/skills/alethea/agents/openai.yaml" ]; then
+  ensure_dir "$ROOT/.agents/skills/alethea/agents"
+  cp "$CORE_DIR/.agents/skills/alethea/agents/openai.yaml" \
+    "$ROOT/.agents/skills/alethea/agents/openai.yaml"
+fi
 
 cat > "$ROOT/.claude/CLAUDE.md" <<'EOF'
 # Alethea

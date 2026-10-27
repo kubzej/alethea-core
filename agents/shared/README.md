@@ -44,7 +44,7 @@ All specialist agent specs:
 Work agents live in `work/agents/specs/` (private repo) — not in this directory. Two categories:
 
 - **`project.<name>`** — project orchestrators, thin bridges to a specific work project's own agents
-- **`work.<capability>`** — cross-cutting work specialists (e.g. `work.debug`, `work.activity.timeline`)
+- **`work.<capability>`** — cross-cutting work specialists (e.g. `work.inspect`, `work.report`)
 
 See [docs/work-orchestrator-convention.md](docs/work-orchestrator-convention.md) for the full convention: naming, lifecycle, how to add and remove.
 

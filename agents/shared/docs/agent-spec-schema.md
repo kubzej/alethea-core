@@ -88,6 +88,7 @@ Rules for optional sections:
 - ingest agents own content creation inside their domains.
 - root orchestrators route only and do not absorb specialist work.
 - any new agent must have a boundary that is meaningfully different from existing agents.
+- core specs may describe a generic work boundary and load an optional local contract, but must not contain employer-specific integrations, tool identifiers, skills, policies, or concrete work routing; those belong exclusively in `work/`.
 
 ## Session context ledger
 

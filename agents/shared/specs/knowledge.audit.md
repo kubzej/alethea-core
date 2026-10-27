@@ -12,6 +12,7 @@ Inspect the current state of the knowledge wiki, find structural problems, dupli
 
 - `alethea-knowledge/personal/wiki/` — when auditing personal knowledge
 - `work/wiki/` — when auditing work knowledge
+- the optional `work/agents/contract.md` and attributed work evidence - only when auditing work knowledge
 - Can audit both in one run if requested
 
 ## Write scope
@@ -55,6 +56,12 @@ None. This is a read-only agent. Output is a report delivered in the conversatio
    - Orphan check: read all index files; compare referenced paths against actual file list; flag broken references and unlisted pages.
    - Stale draft check: read frontmatter on all pages; collect pages with `status: draft`; compare file modification date against today; flag pages older than 30 days.
 5. **Produce the audit report** — structured output in the conversation (see output format below).
+
+For work factual consistency checks, load the optional `work/agents/contract.md` and retain source attribution and uncertainty in findings. Source integrations and priority rules belong in that local contract. Structural-only audits need no external search. In a combined personal/work audit, keep personal content out of work queries and handoffs.
+
+## Escalation
+
+Return work knowledge corrections with attributed evidence and affected pages to the orchestrator, which follows the local contract for an ingest handoff. The auditor remains read-only. Structural audit recommendations remain report-only and do not authorize unrelated cleanup. For an explicit read-only audit, report pending knowledge updates without writing or starting ingest.
 
 ## Output format
 
